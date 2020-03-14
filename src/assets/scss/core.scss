@@ -1,0 +1,103 @@
+@import "vars";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+}
+
+.font {
+  font-family: $fonts;
+}
+
+.text-center {
+  text-align:center !important
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+
+.fill_w {
+  width: 100%;
+}
+
+.fill_h {
+  height: 100%;
+}
+
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+.vh_100 {
+  height: 100vh;
+}
+
+.vw_100 {
+  width: 100vw;
+}
+
+// Setting positions
+$position_prefix: 'pos';
+@each $cur_position in $positions {
+  .#{$position_prefix}_#{$cur_position} {
+    position: $cur_position;
+  }
+}
+
+// Setting specific color
+$colors_prefix: 'color';
+@each $key, $value in $colors {
+  // example: color_red
+  .#{$colors_prefix}_#{$key} {
+    color: $value;
+  };
+  // example: color_red--hover
+  .#{$colors_prefix}_#{$key}--hover:hover {
+    color: $value;
+  };
+  // example: color_red__bg
+  .#{$colors_prefix}_#{$key}__bg {
+    background-color: $value;
+  };
+  // example: color_red__bg--hover
+  .#{$colors_prefix}_#{$key}__bg--hover:hover {
+    background-color: $value;
+  };
+
+  .#{$colors_prefix}_#{$key}__scrollbar {
+    &::-webkit-scrollbar {
+      height: 4px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 360px;
+      background-color: rgba( $value, .3);
+    }
+  }
+}
+
+
+// Setting Text Decoration
+$text_dec_prefix: 'text-decoration';
+@each $cur_text_dec in $text_decorations {
+  .#{$text_dec_prefix}_#{$cur_text_dec} {
+    text-decoration: $cur_text_dec;
+  }
+}
+
+// Setting text transforms
+$text_transform_prefix: 'text';
+@each $cur_text_transform in $text_transforms {
+  .#{$text_transform_prefix}_#{$cur_text_transform} {
+    text-transform: $cur_text_transform;
+  }
+}
