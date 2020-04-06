@@ -1,0 +1,18 @@
+@import "src/assets/scss/vars";
+
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  background: #FFFFFF;
+  border-top: 1px solid #DDDDDD;
+  height: 50px;
+  &__item {
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+    color: $grey;
+    &--icon{
+      font-size: 23px;
+    }
+  }
+}

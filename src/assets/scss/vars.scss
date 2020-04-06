@@ -33,7 +33,7 @@ $wide_letter_spacing: 0.08em;
 // Shades of scss.
 // Names were given relative to the name in the colors in the CURRENT design
 // If in the future the design changes and some colors are not used, DELETE them
-
+$main: #00BBFF;
 $main_30: #995B00;
 $main_35: #B26A00;
 $main_40: #CC7900;
@@ -51,6 +51,7 @@ $red: #F04848;
 $black: #282F4A;
 $green: #2ABE42;
 $white: #ffffff;
+$grey: #888888;
 $grey_additional_1: #7A7B82;
 $grey_additional_2: #B0BAC9;
 $grey_placeholder: #CCCCCE;
