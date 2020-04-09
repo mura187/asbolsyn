@@ -20,13 +20,6 @@ function Login(props:LoginPageTypes.IProps) {
 
   const { onLogin } = props;
 
-  // useEffect(
-  //   () => {
-  //     console.log('creds', userInput.login, userInput.password);
-  //   },
-  //   [onLogin, userInput.password, userInput.login],
-  // );
-
   const handleChange = (e: any) => {
     const { name } = e.target;
     const newValue = e.target.value;

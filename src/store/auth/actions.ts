@@ -18,7 +18,7 @@ export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?:
     action: LOGIN,
     apiCall: () => { return api.login(data); },
     onSuccess: (response: any) => {
-      window.location.replace('');
+      window.location.replace('/');
       return { user_token: response.Token };
     },
     onError: (response: any) => ({ user_token: response.Error }),
