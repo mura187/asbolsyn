@@ -8,6 +8,7 @@ $space-values : (
         8,
         10,
         12,
+        14,
         16,
         20,
         24,
@@ -20,6 +21,10 @@ $space-values : (
         48,
         60,
         64,
+        72,
+        80
+        90,
+        180
 ) !default;
 
 // margin and padding shorthands
@@ -39,7 +44,9 @@ $space-prefixes : (
         py : padding,
   // Right and left - padding and margin
         mx : margin,
-        px : padding
+        px : padding,
+  // F - font-size
+        f : font-size 
 ) !default;
 
 // change these values if its not imported into bootstrap

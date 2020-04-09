@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ILoadTypes } from 'src/store/types';
-import { CODE_ACTIVATION, GET_USER, SEND_REGISTER } from './types';
+import { CODE_ACTIVATION, GET_USER, SEND_REGISTER, LOGIN } from './types';
 
 const user = (
     state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
@@ -68,6 +68,17 @@ const register = (
   }
 };
 
+const userToken = (state = null, action: any) => {
+  switch (action.type) {
+    case LOGIN.success:
+      return (action.user_token || null);
+    case LOGIN.failed:
+      return (action.user_error || null);
+    default:
+      return state;
+  }
+};
+
 const token = (
   state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
   switch (action.type) {
@@ -105,6 +116,7 @@ const authReducer = combineReducers({
   register,
   user,
   token,
+  userToken,
 });
 
 export default authReducer;

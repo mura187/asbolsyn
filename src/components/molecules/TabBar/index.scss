@@ -1,18 +1,25 @@
 @import "src/assets/scss/vars";
 
 .tabbar {
+  &__activeLink {
+    color: $black!important;
+    text-decoration: underline;
+  }
   position: fixed;
   bottom: 0;
-  background: #FFFFFF;
-  border-top: 1px solid #DDDDDD;
+  background: #ffffff;
+  border-top: 1px solid $grey_light;
   height: 50px;
   &__item {
     font-size: 10px;
     line-height: 12px;
     text-align: center;
     color: $grey;
-    &--icon{
+    &--icon {
       font-size: 23px;
+    }
+    &--center {
+      color: $main;
     }
   }
 }

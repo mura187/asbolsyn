@@ -1,6 +1,6 @@
 import { defaultAction } from 'src/store/defaultAction';
 import * as api from './api';
-import { SEND_REGISTER, GET_USER, CODE_ACTIVATION } from './types';
+import { SEND_REGISTER, CODE_ACTIVATION, LOGIN } from './types';
 
 export const sendRegistration = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -12,13 +12,16 @@ export const sendRegistration = (data: any, callbacks: any) => (dispatch: any, g
   });
 };
 
-export const login = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
+export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: GET_USER,
+    action: LOGIN,
     apiCall: () => { return api.login(data); },
-    onSuccess: (response: any) => ({ user: response.data }),
-    onError: (response: any) => ({ errorMessage: response.message }),
+    onSuccess: (response: any) => {
+      window.location.replace('');
+      return { user_token: response.Token };
+    },
+    onError: (response: any) => ({ user_token: response.Error }),
   });
 };
 

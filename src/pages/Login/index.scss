@@ -1,0 +1,17 @@
+.form-login{
+  width: 315px;
+  min-height: 177px;
+  box-shadow: 0px 5px 10px rgba(28, 24, 25, 0.15);
+  border-radius: 3px;
+  &__input, &__submit{
+    max-width: 240px;
+    height: 36px;
+  }
+  &__input::placeholder{
+    font-size: 13px;
+  }
+}
+.main-logo{
+  position: relative;
+  top: 120px; 
+}

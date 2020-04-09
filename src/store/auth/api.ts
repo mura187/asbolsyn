@@ -3,7 +3,7 @@ import { stdApiPOST } from 'src/store/defaultApi';
 
 const registrationUrl = `${API_URL}auth/create_activation`;
 const codeUrl = `${API_URL}auth/confirm_activation/`;
-const authUrl = `${API_URL}auth/register`;
+const authUrl = `${API_URL}api/user/login`;
 
 export const sendRegistration = (data: any) => (
     stdApiPOST({ data, url: registrationUrl })

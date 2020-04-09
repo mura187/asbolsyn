@@ -1,42 +1,52 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavLink } from 'react-router-dom';
 import { faHome, faStar, faPlusSquare, faHistory, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-// import { TabBarTypes } from './types';
 import './index.scss';
 
 function TabBar() {
   return(
     <div className="tabbar d-flex flex-row justify-content-between pt-12 pb-20 fill_w">
-      <div className="tabbar__item text-center">
-        <FontAwesomeIcon className="tabbar__item--icon" icon={faHome} color="" />
-        <p>
-          Главная
-        </p>
-      </div>
-      <div className="tabbar__item text-center">
-        <FontAwesomeIcon className="tabbar__item--icon" icon={faStar} color="" />
-        <p>
-          Главная
-        </p>
-      </div>
-      <div className="tabbar__item text-center">
-        <FontAwesomeIcon className="tabbar__item--icon" icon={faPlusSquare} color="#00BBFF" />
-        <p>
-          Создать
-        </p>
-      </div>
-      <div className="tabbar__item text-center">
-        <FontAwesomeIcon className="tabbar__item--icon" icon={faHistory} color="" />
-        <p>
-          История
-        </p>
-      </div>
-      <div className="tabbar__item text-center">
-        <FontAwesomeIcon className="tabbar__item--icon" icon={faUserCircle} color="" />
-        <p>
-          Кабинет
-        </p>
-      </div>
+      <NavLink to="/" activeClassName="tabbar__activeLink">
+        <div className="tabbar__item text-center pb-8 px-8">
+          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faHome} color="" />
+          <p>
+            Главная
+          </p>
+        </div>
+      </NavLink>
+      <NavLink to="/" activeClassName="tabbar__activeLink">
+        <div className="tabbar__item text-center pb-8 px-8">
+          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faStar} color="" />
+          <p>
+            Сделки
+          </p>
+        </div>
+      </NavLink>
+      <NavLink to="/" activeClassName="tabbar__activeLink">
+        <div className="tabbar__item text-center pb-8 px-8">
+          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faPlusSquare} color="#00BBFF" />
+          <p className="tabbar__item--center">
+            Создать
+          </p>
+        </div>
+      </NavLink>
+      <NavLink to="/" activeClassName="tabbar__activeLink">
+        <div className="tabbar__item text-center pb-8 px-8">
+          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faHistory} color="" />
+          <p>
+            История
+          </p>
+        </div>
+      </NavLink>
+      <NavLink to="/" activeClassName="tabbar__activeLink">
+        <div className="tabbar__item text-center pb-8 px-8">
+          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faUserCircle} color="" />
+          <p>
+            Кабинет
+          </p>
+        </div>
+      </NavLink>
 
     </div>
   )

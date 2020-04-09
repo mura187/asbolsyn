@@ -1,78 +1,76 @@
-export const defaultAction = (dispatch: any, getState: any , options: any) => {
+export const defaultAction = (dispatch: any, getState: any , options: any, responseType?: string) => {
   const callbacks = options.callbacks || {};
-  dispatch({ type: options.action.started, ...options.withStart });
+  dispatch({ type: options.action.started });
   options.apiCall()
-    .then(
-      (response: any) => {
-        switch (response.status) {
-          case 200:
-            response
-              .text()
-              .then(
-                (value: any) => {
-                  const responseObject = JSON.parse(value);
-                  if (responseObject.code === 0) {
-                    dispatch({
-                      type: options.action.success,
-                      ...options.onSuccess(responseObject),
+        .then(
+            (response: any) => {
+              switch (response.status) {
+                case 200:
+                case 201:
+                  response
+                    .text()
+                    .then(
+                      (value: any) => {
+                        if (responseType) {
+                          const responseObject = `data:image/png;base64,${value}`;
+                          dispatch({
+                            type: options.action.success,
+                            ...options.onSuccess(responseObject),
+                          });
+                          if (callbacks.onSuccess) {
+                            callbacks.onSuccess(options.onSuccess(responseObject));
+                          }
+                        } else {
+                          const responseObject = JSON.parse(value);
+                          dispatch({
+                            type: options.action.success,
+                            ...options.onSuccess(responseObject),
+                          });
+                          if (callbacks.onSuccess) {
+                            callbacks.onSuccess(options.onSuccess(responseObject));
+                          }
+                        }
+                      },
+                    );
+                  break;
+                case 230:
+                  response
+                    .text()
+                    .then(
+                        (value: any) => {
+                          dispatch({
+                            type: options.action.success,
+                            ...options.onSuccess(true),
+                          });
+                          if (callbacks.onSuccess) {
+                            callbacks.onSuccess(options.onSuccess(true));
+                          }
+                        },
+                    );
+                  break;
+                case 504:
+                  response
+                    .text()
+                    .then((val: any) => {
+                      dispatch({
+                        type: options.action.failed,
+                        ...options.onError({ message: 'serverError' }),
+                      });
                     });
-                    if (callbacks.onSuccess) {
-                      callbacks.onSuccess(options.onSuccess(responseObject));
-                    }
-                  } else {
-                    dispatch({
-                      type: options.action.failed,
-                      ...options.onError(responseObject),
-                    });
-                  }
-                },
-              );
-            break;
-          case 400:
-          case 404:
-          case 412:
-            response
-            .json()
-            .then((val: any) => {
+                  break;
+                default:
+                  dispatch({
+                    type: options.action.failed,
+                    errorMessage: `Ошибка #${response.status}`,
+                  });
+              }
+            },
+            (error: any) => {
               dispatch({
                 type: options.action.failed,
-                ...options.onError({ message: val.message || 'serverError', status: val.status }),
-              });
-            });
-            break;
-          case 500:
-            response
-            .text()
-            .then((val: any) => {
-              dispatch({
-                type: options.action.failed,
+                errorMessage: 'Проверьте соединение',
                 ...options.onError({ message: 'serverError' }),
               });
-            });
-            break;
-          case 504:
-            response
-              .text()
-              .then((val: any) => {
-                dispatch({
-                  type: options.action.failed,
-                  ...options.onError({ message: 'serverError' }),
-                });
-              });
-            break;
-          default:
-            dispatch({
-              type: options.action.failed,
-              errorMessage: `Ошибка #${response.status}`,
-            });
-        }
-      },
-      (error: any) => {
-        dispatch({
-          type: options.action.failed,
-          errorMessage: 'Проверьте соеденение',
-          ...options.onError({ message: 'serverError' }),
-        });
-      },
-    );
+            },
+        );
 };

@@ -10,6 +10,12 @@ export const GET_USER = {
   failed: 'GET_USER_FAILED',
 };
 
+export const LOGIN = {
+  started: 'LOGIN_START',
+  success: 'LOGIN_SUCCESS',
+  failed: 'LOGIN_FAILED',
+};
+
 export const CODE_ACTIVATION = {
   started: 'CODE_ACTIVATION_START',
   success: 'CODE_ACTIVATION_SUCCESS',

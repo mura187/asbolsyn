@@ -1,17 +1,18 @@
 export const STD_HEADERS = {
   Accept: 'application/json, application/xml, text/plain, text/html, *.*',
   'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
 };
 
 const env = process.env.NODE_ENV;
 export const API_URL = (
   env === 'production' ?
     // prod
-    'prodlink'
+    'http://185.22.67.118:8080/'
   : env === 'development' ?
     // dev
-    'devlink'
+    'http://185.22.67.118:8080/'
   :
     // local
-    'devlink'
+    'http://185.22.67.118:8080/'
 );
