@@ -1,9 +1,12 @@
-import React from 'react';
-import Button from 'src/components/atoms/Button';
-import CardItem from 'src/components/molecules/CardItem';
-import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
-import { exampleCardItems } from 'src/components/molecules/CardItem/mock';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import itemActions from 'src/store/item/actions';
+
 import TabBar from 'src/components/molecules/TabBar';
+import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
+
+import { exampleCardItems } from 'src/components/molecules/CardItem/mock';
+import { MainPageTypes } from './types';
 
 const cardItem = {
   id: 1,
@@ -16,13 +19,22 @@ const cardItem = {
   created: 'Today',
 };
 
-function MainPage() {
+function MainPage(props: MainPageTypes.IProps) {
+  const { items } = props;
+
   return (
     <div>
-      <CardItemGroup items={exampleCardItems} />
+      <CardItemGroup items={items} />
       <TabBar />
     </div>
   );
 }
 
-export default MainPage;
+export const mapStateToProps = (state: any) => {
+  return ({
+    items: state.itemReducer.items.data,
+  });
+};
+
+
+export default connect(mapStateToProps, null)(MainPage);

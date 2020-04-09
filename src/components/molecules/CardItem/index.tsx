@@ -1,6 +1,7 @@
 import * as React from 'react';
+import Moment from 'react-moment';
+import 'moment/locale/ru';
 import { CardItemTypes } from 'src/components/molecules/CardItem/types';
-// import classNames from 'classNames';
 import './index.scss';
 
 function CardItem(props: CardItemTypes.IProps) {
@@ -26,7 +27,7 @@ function CardItem(props: CardItemTypes.IProps) {
         </div>
         <hr className="card-item__divider px-12" />
         <div className="card-item__created-info d-flex flex-row p-12 justify-content-between">
-          <p>{created}</p>
+          {created && <Moment fromNow>{created}</Moment>}
           <p>{location.join(', ')}</p>
         </div>
       </div>
