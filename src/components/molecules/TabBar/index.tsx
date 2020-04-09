@@ -15,7 +15,7 @@ function TabBar() {
           </p>
         </div>
       </NavLink>
-      <NavLink to="/" activeClassName="tabbar__activeLink">
+      <NavLink to="/detail" activeClassName="tabbar__activeLink">
         <div className="tabbar__item text-center pb-8 px-8">
           <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faStar} color="" />
           <p>
@@ -39,7 +39,7 @@ function TabBar() {
           </p>
         </div>
       </NavLink>
-      <NavLink to="/" activeClassName="tabbar__activeLink">
+      <NavLink to="/cabinet" activeClassName="tabbar__activeLink">
         <div className="tabbar__item text-center pb-8 px-8">
           <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faUserCircle} color="" />
           <p>
