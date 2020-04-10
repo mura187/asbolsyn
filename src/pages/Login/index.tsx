@@ -47,7 +47,7 @@ function Login(props:LoginPageTypes.IProps) {
     <div>
       <h1 className="main-logo text-center f-32">As Bolsyn</h1>
       <div className="row align-items-center justify-content-center mt-180">
-        <div className="form-login">
+        <div className="form-login container">
           <div className="text-left">
             <p className="container px-36 my-20 f-14">Вход в личный кабинет</p>
           </div>
@@ -88,18 +88,12 @@ function Login(props:LoginPageTypes.IProps) {
 
 const mapStateToProps = (state: any) => {
   return ({
-  // fitnesses: state.fitness.fitnesses,
     login: state.login,
   });
 };
 
 const mapDispatchToProps = {
-  // getFitnesses: fitnessActions.getFitnesses,
   onLogin: authActions.login,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-
-    // this.onChange = this.onChange.bind(this);
-    // this.submitForm = this.submitForm.bind(this);

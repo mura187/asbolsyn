@@ -48,6 +48,16 @@ export const defaultAction = (dispatch: any, getState: any , options: any, respo
                         },
                     );
                   break;
+                case 500:
+                  response
+                    .text()
+                    .then((val: any) => {
+                      dispatch({
+                        type: options.action.failed,
+                        ...options.onError({ message: 'ошибка 500!' }),
+                      });
+                    });
+                  break;
                 case 504:
                   response
                     .text()

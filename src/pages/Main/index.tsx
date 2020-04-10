@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import itemActions from 'src/store/item/actions';
 
+import SearchToggler from 'src/components/atoms/SearchToggler';
 import TabBar from 'src/components/molecules/TabBar';
 import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
 
@@ -20,21 +21,34 @@ const cardItem = {
 };
 
 function MainPage(props: MainPageTypes.IProps) {
-  const { items } = props;
+  const { items, getItems } = props;
+  const [didMount, setDidMount] = useState(false);
+
+  useEffect(() => {
+    if(!didMount){
+      setDidMount(true);
+      getItems && getItems();
+    }
+  },
+  );
 
   return (
     <div>
+      <SearchToggler link="/map" title="На карте" />
       <CardItemGroup items={items} />
       <TabBar />
     </div>
   );
 }
 
-export const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: any) => {
   return ({
     items: state.itemReducer.items.data,
   });
 };
 
+const mapDispatchToProps = {
+  getItems: itemActions.getItems,
+}
 
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

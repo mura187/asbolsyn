@@ -1,6 +1,6 @@
-export namespace MainPageTypes {
+export namespace MapPageTypes {
   export interface IProps{
-    items? : any;
+    places? : any;
     getItems?(): void;
   }
 }

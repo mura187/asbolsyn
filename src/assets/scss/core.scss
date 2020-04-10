@@ -26,6 +26,17 @@ body, html {
 .text-danger {
   color: $red !important;
 }
+.text-main {
+  color: $main !important;
+}
+
+.text-grey {
+  color: $grey !important;
+}
+
+.text-decoration-none{
+  text-decoration: none!important;
+}
 
 .fill_w {
   width: 100%;

@@ -3,7 +3,7 @@
 .tabbar {
   &__activeLink {
     color: $black!important;
-    text-decoration: underline;
+    text-decoration: none;
   }
   position: fixed;
   bottom: 0;

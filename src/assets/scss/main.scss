@@ -8,7 +8,11 @@ body, html {
   @extend .font;
   scroll-behavior: smooth;
   color: $black;
-  background: #FAFAFA;
+  background: #f2f2f3;
+}
+
+.container{
+  max-width:768px!important;
 }
 
 // Inputs

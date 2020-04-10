@@ -48,8 +48,46 @@ const items = (
   }
 };
 
+export const parsePlacesData = (raw: IItem): any => ({
+  price: raw.price,
+  name: raw.name,
+  location: raw.location,
+});
+
+const places = (
+  state = { data: [], loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_ITEMS.started:
+      return {
+        data: [],
+        loading: true,
+      };
+    case GET_ITEMS.failed:
+      return {
+        data: [],
+        errorMessage: action.errorMessage,
+        loading: false,
+      };
+    case GET_ITEMS.success:
+      if (!action.list) {
+        return {
+          data: [],
+          loading: false,
+        };
+      }
+      const parsedData = action.list.map((n: IItem) => parsePlacesData(n));
+      return {
+        data: parsedData,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const itemReducer = combineReducers({
   items,
+  places,
 });
 
 export default itemReducer;
