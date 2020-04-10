@@ -9,7 +9,6 @@ function CardItem(props: CardItemTypes.IProps) {
     producerId,
     name,
     price,
-    initialQuantity,
     availableQuantity,
     location,
     created,
@@ -23,7 +22,7 @@ function CardItem(props: CardItemTypes.IProps) {
         </div>
         <div className="d-flex flex-column p-12">
           <h3 className="card-item__title my-4">{name}<br/></h3>
-          <h3 className="card-item__quantity">порции: {initialQuantity} <br/> осталось: {availableQuantity}</h3>
+          <h3 className="card-item__quantity">порции: {availableQuantity} <br/></h3>
         </div>
         <hr className="card-item__divider px-12" />
         <div className="card-item__created-info d-flex flex-row p-12 justify-content-between">
