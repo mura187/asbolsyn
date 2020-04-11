@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import Button from 'src/components/atoms/Button';
 
 import './index.scss';
 import { SearchTogglerTypes } from './types';

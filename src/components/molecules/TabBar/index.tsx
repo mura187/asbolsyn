@@ -6,7 +6,7 @@ import './index.scss';
 
 function TabBar() {
   return(
-    <div className="tabbar d-flex flex-row justify-content-between pt-12 pb-20 fill_w">
+    <div className="container tabbar d-flex flex-row justify-content-between pt-12 pb-20 fill_w">
       <NavLink to="/" activeClassName="tabbar__activeLink text-decoration-none">
         <div className="tabbar__item text-center pb-8 px-8">
           <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faHome} color="" />

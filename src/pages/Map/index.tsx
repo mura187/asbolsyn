@@ -9,15 +9,15 @@ import { MapPageTypes } from './types';
 function MapPage(props: MapPageTypes.IProps) {
   const { places, getItems } = props;
   const coordinates = [50.322687, 57.131267];
-  const [coords, setCoords] = useState('');
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    if(!didMount){
+    if (!didMount) {
       setDidMount(true);
       getItems && getItems();
     }
   },
+  [didMount, getItems],
   );
 
   const mapState = { center: { ...coordinates }, zoom: 11 };
@@ -30,14 +30,10 @@ function MapPage(props: MapPageTypes.IProps) {
     'control.ZoomControl',
   ];
 
-  const onMapClick = (event: any) => {
-    setCoords(event.get("coords"));
-  };
-
   return (<>
       <SearchToggler link="/" title="К списку" />
       <YMaps /* onLoad={(ymaps: any) => console.log('ymaps', ymaps)} */>
-        <Map onClick={onMapClick} modules={mapModules} state={mapState} style={{ width: '100%', height: '55vh', zIndex: 9 }}
+        <Map modules={mapModules} state={mapState} style={{ width: '100%', height: '55vh', zIndex: 9 }}
           options={{
             suppressMapOpenBlock: true,
           }}

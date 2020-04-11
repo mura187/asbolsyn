@@ -29,9 +29,23 @@ body, html {
 .text-main {
   color: $main !important;
 }
-
 .text-grey {
   color: $grey !important;
+}
+
+.cursor-pointer{
+  cursor: pointer!important;
+}
+
+.bg-white {
+  background: $white!important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $grey_divider;
+}
+.border-top {
+  border-top: 1px solid $grey_divider;
 }
 
 .text-decoration-none{
