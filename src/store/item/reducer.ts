@@ -6,7 +6,7 @@ import { CardItemTypes } from 'src/components/molecules/CardItem/types';
 
 export const parseItemsData = (raw: IItem): CardItemTypes.IProps => ({
   id: raw.id,
-  name: raw.name,
+  foodName: raw.food_name,
   producerId: raw.producer_id,
   price: raw.price,
   initialQuantity: raw.initial_quantity,
@@ -50,7 +50,7 @@ const items = (
 
 export const parsePlacesData = (raw: IItem): any => ({
   price: raw.price,
-  name: raw.name,
+  name: raw.food_name,
   location: raw.location,
 });
 

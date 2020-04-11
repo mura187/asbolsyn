@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ILoadTypes } from 'src/store/types';
-import { CODE_ACTIVATION, GET_USER, SEND_REGISTER, LOGIN } from './types';
+import { GET_USER, SEND_REGISTER, LOGIN, UPDATE_PASSWORD } from './types';
 
 const user = (
     state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
@@ -79,34 +79,24 @@ const userToken = (state = null, action: any) => {
   }
 };
 
-const token = (
-  state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
+const userInfo = (state = null, action: any) => {
   switch (action.type) {
-    case CODE_ACTIVATION.failed:
-      return {
-        data: null,
-        errorMessage: action.errorMessage,
-        loading: true,
-      };
-    case CODE_ACTIVATION.success:
-      if (!action.token) {
-        return {
-          data: null,
-          errorMessage: undefined,
-          loading: false,
-        };
-      }
-      return {
-        data: action.token,
-        errorMessage: undefined,
-        loading: false,
-      };
-    case CODE_ACTIVATION.started:
-      return {
-        data: null,
-        errorMessage: undefined,
-        loading: true,
-      };
+    case LOGIN.success:
+      return (action.user_info || null);
+    case LOGIN.failed:
+      return (action.user_error || null);
+    default:
+      return state;
+  }
+};
+
+
+const errorPassword = (state = null, action: any) => {
+  switch (action.type) {
+    case UPDATE_PASSWORD.success:
+      return (action.user_info || null);
+    case UPDATE_PASSWORD.failed:
+      return (action.errorPassword || null);
     default:
       return state;
   }
@@ -115,8 +105,9 @@ const token = (
 const authReducer = combineReducers({
   register,
   user,
-  token,
   userToken,
+  userInfo,
+  errorPassword,
 });
 
 export default authReducer;

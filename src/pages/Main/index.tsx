@@ -5,7 +5,6 @@ import itemActions from 'src/store/item/actions';
 import SearchToggler from 'src/components/atoms/SearchToggler';
 import TabBar from 'src/components/molecules/TabBar';
 import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
-
 import { MainPageTypes } from './types';
 
 function MainPage(props: MainPageTypes.IProps) {

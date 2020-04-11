@@ -4,7 +4,7 @@ export const exampleCardItems: CardItemTypes.IProps[] = [
   {
     id: 1,
     producerId: 1,
-    name: 'Лагман',
+    foodName: 'Лагман',
     price: 1300,
     initialQuantity: 20,
     availableQuantity: 15,
@@ -14,7 +14,7 @@ export const exampleCardItems: CardItemTypes.IProps[] = [
   {
     id: 2,
     producerId: 31,
-    name: 'Гуйру цомян',
+    foodName: 'Гуйру цомян',
     price: 1500,
     initialQuantity: 22,
     availableQuantity: 13,
@@ -24,7 +24,7 @@ export const exampleCardItems: CardItemTypes.IProps[] = [
   {
     id: 3,
     producerId: 23,
-    name: 'Суйру',
+    foodName: 'Суйру',
     price: 500,
     initialQuantity: 12,
     availableQuantity: 11,
@@ -34,7 +34,7 @@ export const exampleCardItems: CardItemTypes.IProps[] = [
   {
     id: 4,
     producerId: 21,
-    name: 'Мошуру',
+    foodName: 'Мошуру',
     price: 400,
     initialQuantity: 15,
     availableQuantity: 15,
@@ -44,7 +44,7 @@ export const exampleCardItems: CardItemTypes.IProps[] = [
   {
     id: 5,
     producerId: 33,
-    name: 'Плов',
+    foodName: 'Плов',
     price: 1100,
     initialQuantity: 5,
     availableQuantity: 2,
@@ -54,7 +54,7 @@ export const exampleCardItems: CardItemTypes.IProps[] = [
   {
     id: 6,
     producerId: 36,
-    name: 'Салатик',
+    foodName: 'Салатик',
     price: 1900,
     initialQuantity: 9,
     availableQuantity: 7,

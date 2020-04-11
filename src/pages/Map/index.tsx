@@ -32,7 +32,7 @@ function MapPage(props: MapPageTypes.IProps) {
 
   return (<>
       <SearchToggler link="/" title="К списку" />
-      <YMaps /* onLoad={(ymaps: any) => console.log('ymaps', ymaps)} */>
+      <YMaps>
         <Map modules={mapModules} state={mapState} style={{ width: '100%', height: '55vh', zIndex: 9 }}
           options={{
             suppressMapOpenBlock: true,

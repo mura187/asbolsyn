@@ -1,7 +1,7 @@
 export interface IItem {
   id: number;
   producer_id: number;
-  name: string;
+  food_name: string;
   price: number;
   initial_quantity: number;
   available_quantity: number;

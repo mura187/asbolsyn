@@ -16,6 +16,12 @@ export const LOGIN = {
   failed: 'LOGIN_FAILED',
 };
 
+export const UPDATE_PASSWORD = {
+  started: 'UPDATE_PASSWORD_START',
+  success: 'UPDATE_PASSWORD_SUCCESS',
+  failed: 'UPDATE_PASSWORD_FAILED',
+};
+
 export const CODE_ACTIVATION = {
   started: 'CODE_ACTIVATION_START',
   success: 'CODE_ACTIVATION_SUCCESS',

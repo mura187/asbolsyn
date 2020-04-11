@@ -14,7 +14,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
   const [userInput, setUserInput] = useReducer(
     (state: any, newState: any) => ({ ...state, ...newState }),
     {
-      name: '',
+      foodName: '',
       price: null,
       initialQuantity: null,
       location: '',
@@ -38,7 +38,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
     e.preventDefault();
     onCreateOffer && onCreateOffer(
       {
-        name: userInput.name,
+        food_name: userInput.foodName,
         price: parseInt(userInput.price),
         initial_quantity: parseInt(userInput.initialQuantity),
         location: JSON.parse(getLocation),
@@ -62,7 +62,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
             <input required type="text"
               className="container create-offer__input my-8"
               placeholder="Введите название блюда"
-              name="name" value={userInput.name} onChange={handleChange}
+              name="foodName" value={userInput.foodName} onChange={handleChange}
             />
             <input required type="number"
               className="container create-offer__input my-8"
@@ -78,7 +78,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
             <p className="mt-8 mb-4 f-14 text-grey">Адрес</p>
             <YandexMap />
             <button onClick={submitForm}
-              className="container create-offer__submit my-16" type="submit">Создать
+              className="container create-offer__submit mt-16 mb-40" type="submit">Создать
             </button>
             {error &&
               <div className="text-left text-danger">

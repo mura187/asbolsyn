@@ -2,7 +2,7 @@ export namespace CardItemTypes {
   export interface IProps {
     id: number;
     producerId: number;
-    name: string;
+    foodName: string;
     price: number;
     initialQuantity: number;
     availableQuantity: number;

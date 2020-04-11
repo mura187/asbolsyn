@@ -9,6 +9,9 @@ export const Map = loadable(() => import('src/pages/Map'), {
 export const Cabinet = loadable(() => import('src/pages/Cabinet'), {
   modules: ['cabinet'],
 });
+export const Password = loadable(() => import('src/pages/Cabinet/PasswordUpdatePage'), {
+  modules: ['cabinet/password'],
+});
 export const Detail = loadable(() => import('src/pages/Detail'), {
   modules: ['detail'],
 });

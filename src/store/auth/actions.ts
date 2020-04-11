@@ -1,6 +1,6 @@
 import { defaultAction } from 'src/store/defaultAction';
 import * as api from './api';
-import { SEND_REGISTER, CODE_ACTIVATION, LOGIN } from './types';
+import { SEND_REGISTER, CODE_ACTIVATION, LOGIN, UPDATE_PASSWORD } from './types';
 
 export const sendRegistration = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -20,11 +20,16 @@ export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?:
     onSuccess: (response: any) => {
       window.location.replace('/');
       sessionStorage.setItem('token', response.Token);
-      return { user_token: response.Token };
+      sessionStorage.setItem('userId', response.User.id);
+      return {
+        user_token: response.Token,
+        user_info: response.User,
+      };
     },
     onError: (response: any) => ({ user_token: response.Error }),
   });
 };
+
 
 export const confirmActivation = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -36,8 +41,21 @@ export const confirmActivation = (data: any, callbacks: any) => (dispatch: any, 
   });
 };
 
+export const updatePassword = (data: any, callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: UPDATE_PASSWORD,
+    apiCall: () => { return api.updatePassword(data); },
+    onSuccess: () => {
+      window.location.replace('/cabinet');
+    },
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
 export default{
   sendRegistration,
   login,
   confirmActivation,
+  updatePassword,
 };
