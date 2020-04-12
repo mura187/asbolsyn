@@ -1,4 +1,5 @@
 {
+  "homepage": "http://mura187.github.io/asbolsyn",
   "name": "asbolsyn",
   "version": "0.1.0",
   "private": true,
@@ -40,6 +41,8 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "predeploy":"npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build:dev": "REACT_APP_ENV=development react-scripts build",
     "build:prod": "REACT_APP_ENV=production react-scripts build",
@@ -77,6 +80,7 @@
     "@types/react-router": "^5.1.4",
     "@types/redux-logger": "^3.0.7",
     "babel-loader": "^8.0.6",
+    "gh-pages": "^2.2.0",
     "react-docgen-typescript-loader": "^3.6.0",
     "redux-logger": "^3.0.6",
     "tslint": "^6.0.0",
