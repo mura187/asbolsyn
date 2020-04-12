@@ -2,6 +2,7 @@
 ## [Design in figma](https://www.figma.com/file/IiaC0eJ0ol6hpAL58mDWZCye/As-Bolsyn?node-id=54%3A2)
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## [Agile Board](https://github.com/users/fullacc/projects/1)
 ## Available Scripts
 
 In the project directory, you can run:
