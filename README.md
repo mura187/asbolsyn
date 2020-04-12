@@ -3,4 +3,4 @@
 
 ## [Agile Board](https://github.com/users/fullacc/projects/1)
 
-### Test-user login:password - jon:npassword
+### Test-user login:password - `jon`:`npassword`
