@@ -3,4 +3,7 @@
 
 ## [Agile Board](https://github.com/users/fullacc/projects/1)
 
+`npm install`
+`npm start`
+
 ### Test-user login:password - `jon`:`npassword`
