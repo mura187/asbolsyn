@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import authActions from 'src/store/auth/actions';
 
 import { LoginPageTypes } from './types';
@@ -47,15 +48,15 @@ function Login(props:LoginPageTypes.IProps) {
     <div>
       <h1 className="main-logo text-center f-32">As Bolsyn</h1>
       <div className="row align-items-center justify-content-center mt-180">
-        <div className="form-login container">
+        <div className="form-login container px-20">
           <div className="text-left">
-            <p className="container px-36 my-20 f-14">Вход в личный кабинет</p>
+            <p className="my-20 f-14">Вход в личный кабинет</p>
           </div>
 
           <div className="d-flex flex-column">
             <input type="text"
               className="container form-login__input my-8"
-              placeholder="Введите никнейм или телефон"
+              placeholder="Введите никнейм"/*  или телефон" */
               name="login" value={userInput.login} onChange={handleChange}
             />
             {requiredField &&
@@ -77,6 +78,11 @@ function Login(props:LoginPageTypes.IProps) {
               <div className="text-left text-danger">
                 <p className="container px-36 mb-16 f-14">Неверный логин или пароль</p>
               </div>
+            }
+            {!validUsername && <>
+              <p className="text-center f-12 my-4">Ещё не зарегистрированы?</p>
+              <NavLink className="text-main text-center mt-8 mb-16 f-13" to="/register">Зарегистрироваться</NavLink>
+            </>
             }
           </div>
 

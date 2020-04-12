@@ -5,6 +5,7 @@ $space-values : (
         0,
         2,
         4,
+        6,
         8,
         10,
         12,
@@ -49,7 +50,12 @@ $space-prefixes : (
         mx : margin,
         px : padding,
   // F - font-size
-        f : font-size 
+        f  : font-size,
+  // Right and left - positioning
+        r  :  right,
+        l  : left,
+        t  : top,
+        b  : bottom,
 ) !default;
 
 // change these values if its not imported into bootstrap

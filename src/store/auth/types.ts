@@ -1,8 +1,3 @@
-export const SEND_REGISTER = {
-  started: 'SEND_REGISTER_START',
-  success: 'SEND_REGISTER_SUCCESS',
-  failed: 'SEND_REGISTER_FAILED',
-};
 
 export const GET_USER = {
   started: 'GET_USER_START',
@@ -22,8 +17,20 @@ export const UPDATE_PASSWORD = {
   failed: 'UPDATE_PASSWORD_FAILED',
 };
 
-export const CODE_ACTIVATION = {
-  started: 'CODE_ACTIVATION_START',
-  success: 'CODE_ACTIVATION_SUCCESS',
-  failed: 'CODE_ACTIVATION_FAILED',
+export const CHECK_PHONE = {
+  started: 'CHECK_PHONE_START',
+  success: 'CHECK_PHONE_SUCCESS',
+  failed: 'CHECK_PHONE_FAILED',
+};
+
+export const CHECK_CODE = {
+  started: 'CHECK_CODE_START',
+  success: 'CHECK_CODE_SUCCESS',
+  failed: 'CHECK_CODE_FAILED',
+};
+
+export const REGISTER = {
+  started: 'REGISTER_START',
+  success: 'REGISTER_SUCCESS',
+  failed: 'REGISTER_FAILED',
 };

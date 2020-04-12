@@ -17,15 +17,18 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
 
   const { userInfo } = props;
 
+  console.log(userInfo);
+
   return (
     <div>
       <div className="container bg-white base-shadow">
         <div className="cabinet__user d-flex flex-row justify-content-between">
           <div>
             <p className="f-17 my-15"><FontAwesomeIcon className="f-15 mr-4" icon={faUserAlt} />
-              {userInfo && userInfo.name} {userInfo && userInfo.surname}
+              {userInfo && userInfo.name} {userInfo && userInfo.surname} ({userInfo.user_name})
             </p>
             <p className="f-15 pb-12">Кабинет №{userInfo.id}</p>
+            <p className="f-15 pb-12">+7{userInfo.phone}</p>
           </div>
           <p onClick={logout} className="text-danger my-15 cursor-pointer">Выход</p>
         </div>

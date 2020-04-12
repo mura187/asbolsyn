@@ -9,12 +9,16 @@ body, html {
   scroll-behavior: smooth;
   color: $black;
   background: #f2f2f3;
+  overflow-x: hidden;
 }
 
 .container{
   max-width:768px!important;
 }
 
+a{
+  text-decoration: none;
+}
 // Inputs
 input {
   outline: 0;
@@ -24,7 +28,7 @@ input {
   height: 36px;
 }
 
-button{
+button {
   border: 0;
   background: $main;
   border-radius: 3px;
@@ -36,6 +40,11 @@ button{
   &:focus, &:hover{
     outline:none;
     background: $main_dark;
+  }
+  &:disabled {
+    cursor: no-drop;
+    opacity: 0.5;
+    pointer-events: none;
   }
 }
 

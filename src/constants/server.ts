@@ -1,10 +1,3 @@
-export const STD_HEADERS = {
-  Accept: 'application/json, application/xml, text/plain, text/html, *.*',
-  'Token': `${sessionStorage.getItem('token')}`,
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-};
-
 const env = process.env.NODE_ENV;
 export const API_URL = (
   env === 'production' ?

@@ -2,8 +2,9 @@
 
 .tabbar {
   &__activeLink {
-    color: $black!important;
-    text-decoration: none;
+    p{
+      color: $black!important;
+    }
   }
   position: fixed;
   bottom: 0;
@@ -13,6 +14,7 @@
   border-top: 1px solid $grey_light;
   height: 50px;
   &__item {
+    width: calc(100% - 25%);
     font-size: 10px;
     line-height: 12px;
     text-align: center;

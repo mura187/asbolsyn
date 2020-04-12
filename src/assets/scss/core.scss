@@ -9,6 +9,13 @@ body, html {
   height: 100%;
 }
 
+.position-relative {
+  position: relative!important;
+}
+.position-absolute {
+  position: absolute!important;
+}
+
 .font {
   font-family: $fonts;
 }

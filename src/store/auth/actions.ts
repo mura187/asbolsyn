@@ -1,16 +1,6 @@
 import { defaultAction } from 'src/store/defaultAction';
 import * as api from './api';
-import { SEND_REGISTER, CODE_ACTIVATION, LOGIN, UPDATE_PASSWORD } from './types';
-
-export const sendRegistration = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
-  defaultAction(dispatch, getState, {
-    callbacks,
-    action: SEND_REGISTER,
-    apiCall: () => { return api.sendRegistration(data); },
-    onSuccess: (response: any) => ({ registration: response.data }),
-    onError: (response: any) => ({ errorMessage: response.description }),
-  });
-};
+import { LOGIN, UPDATE_PASSWORD, CHECK_PHONE, CHECK_CODE, REGISTER } from './types';
 
 export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?: any) => {
   defaultAction(dispatch, getState, {
@@ -30,14 +20,42 @@ export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?:
   });
 };
 
-
-export const confirmActivation = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
+export const checkPhone = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
-    action: CODE_ACTIVATION,
-    apiCall: () => { return api.confirmActivation(data); },
-    onSuccess: (response: any) => ({ token: response.data }),
-    onError: (response: any) => ({ errorMessage: response.description }),
+    action: CHECK_PHONE,
+    apiCall: () => { return api.checkPhone(data); },
+    onSuccess: (response: any) => {
+      console.log('checkphone token changed to ', response.Token);
+      sessionStorage.setItem('token', response.Token);
+    },
+    onError: (response: any) => ({ errorMessage: response.Error }),
+  });
+};
+
+export const checkCode = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: CHECK_CODE,
+    apiCall: () => { return api.checkCode(data); },
+    onSuccess: (response: any) => {
+      console.log('checkcode - token changed to ', response.Token);
+      sessionStorage.setItem('token', response.Token);
+    },
+    onError: (response: any) => ({ errorMessage: response.Error }),
+  });
+};
+
+export const register = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: REGISTER,
+    apiCall: () => { return api.register(data); },
+    onSuccess: (response: any) => {
+      sessionStorage.setItem('token', response.Token);
+      window.location.replace('/cabinet');
+    },
+    onError: (response: any) => ({ errorMessage: response.Error }),
   });
 };
 
@@ -54,8 +72,9 @@ export const updatePassword = (data: any, callbacks?: any) => (dispatch?: any, g
 };
 
 export default{
-  sendRegistration,
   login,
-  confirmActivation,
+  checkPhone,
+  checkCode,
+  register,
   updatePassword,
 };

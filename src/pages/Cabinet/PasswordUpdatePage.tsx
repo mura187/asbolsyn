@@ -5,6 +5,8 @@ import authActions from 'src/store/auth/actions';
 import TabBar from 'src/components/molecules/TabBar';
 
 import { PasswordPageTypes } from 'src/pages/Cabinet/types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeDropper, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Password(props: PasswordPageTypes.IProps) {
   const [error, setError] = useState(false);
@@ -53,14 +55,16 @@ function Password(props: PasswordPageTypes.IProps) {
           </div>
 
           <div className="d-flex flex-column container ">
-            <input required type={showPass ? 'text' : 'password'}
-              className="container my-8"
-              placeholder="Введите старый пароль"
-              name="oldPassword" value={userInput.oldPassword} onChange={handleChange}
-            />
-            <div className="text-grey cursor-pointer my-8"
-              onClick={showPass ? () => (setShowPass(false)) : () => (setShowPass(true))}>
-              показать пароль
+            <div className="d-flex flex-row">
+              <input required type={showPass ? 'text' : 'password'}
+                className="container my-8"
+                placeholder="Введите старый пароль"
+                name="oldPassword" value={userInput.oldPassword} onChange={handleChange}
+              />
+              <div className="show-align-self-center text-grey cursor-pointer mt-18 position-absolute r-64"
+                onClick={showPass ? () => (setShowPass(false)) : () => (setShowPass(true))}>
+                { showPass ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} /> }
+              </div>
             </div>
             <input required type={showPass ? 'text' : 'password'}
               className="container my-8"

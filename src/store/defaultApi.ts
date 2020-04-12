@@ -1,15 +1,14 @@
-import { STD_HEADERS } from 'src/constants/server';
-
 const modifyHeader = (options: any) => {
-  const headers = { ...STD_HEADERS };
+  const headers = { ...{
+    Accept: 'application/json, application/xml, text/plain, text/html, *.*',
+    Token: `${sessionStorage.getItem('token')}`,
+    'Content-Type': 'application/json',
+  } };
 
   if (!!options.token) {
-    // headers['Authorization'] = `Bearer ${options.token}`;
+    headers['Token'] = `Bearer ${options.token}`;
   }
 
-  if (!!options.lang) {
-    // headers['Accept-Language'] = options.lang;
-  }
   return headers;
 };
 

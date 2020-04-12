@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ILoadTypes } from 'src/store/types';
-import { GET_USER, SEND_REGISTER, LOGIN, UPDATE_PASSWORD } from './types';
+import { GET_USER, LOGIN, UPDATE_PASSWORD } from './types';
 
 const user = (
     state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
@@ -35,39 +35,6 @@ const user = (
   }
 };
 
-const register = (
-    state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
-  switch (action.type) {
-    case SEND_REGISTER.failed:
-      return {
-        data: null,
-        errorMessage: action.errorMessage,
-        loading: true,
-      };
-    case SEND_REGISTER.success:
-      if (!action.registration) {
-        return {
-          data: null,
-          errorMessage: undefined,
-          loading: false,
-        };
-      }
-      return {
-        data: action.registration,
-        errorMessage: undefined,
-        loading: false,
-      };
-    case SEND_REGISTER.started:
-      return {
-        data: null,
-        errorMessage: undefined,
-        loading: true,
-      };
-    default:
-      return state;
-  }
-};
-
 const userToken = (state = null, action: any) => {
   switch (action.type) {
     case LOGIN.success:
@@ -90,7 +57,6 @@ const userInfo = (state = null, action: any) => {
   }
 };
 
-
 const errorPassword = (state = null, action: any) => {
   switch (action.type) {
     case UPDATE_PASSWORD.success:
@@ -103,7 +69,6 @@ const errorPassword = (state = null, action: any) => {
 };
 
 const authReducer = combineReducers({
-  register,
   user,
   userToken,
   userInfo,
