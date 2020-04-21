@@ -9,3 +9,9 @@ export const CREATE_OFFER = {
   success: 'CREATE_OFFER_SUCCESS',
   failed: 'CREATE_OFFER_FAILED',
 };
+
+export const CREATE_REQUEST = {
+  started: 'CREATE_REQUEST_START',
+  success: 'CREATE_REQUEST_SUCCESS',
+  failed: 'CREATE_REQUEST_FAILED',
+};

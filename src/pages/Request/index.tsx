@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { connect } from 'react-redux';
+import itemsActions from 'src/store/item/actions';
 
 import TabBar from 'src/components/molecules/TabBar';
 import YandexMap from 'src/components/molecules/YandexMap';
@@ -13,9 +14,10 @@ function CreateRequest(props: RequestPageTypes.IProps) {
   const [userInput, setUserInput] = useReducer(
     (state: any, newState: any) => ({ ...state, ...newState }),
     {
-      foodName: '',
+      name: '',
       price: null,
-      initialQuantity: null,
+      description: '',
+      quantity: null,
       location: '',
     },
   );
@@ -37,10 +39,12 @@ function CreateRequest(props: RequestPageTypes.IProps) {
     e.preventDefault();
     onCreateRequest && onCreateRequest(
       {
-        food_name: userInput.foodName,
+        food_name: userInput.name,
         price: parseInt(userInput.price),
-        initial_quantity: parseInt(userInput.initialQuantity),
+        quantity: parseInt(userInput.quantity),
         location: JSON.parse(getLocation),
+        description: userInput.description,
+        spicy: 0,
       },
       {
         onError: () => (setError(true)),
@@ -61,7 +65,12 @@ function CreateRequest(props: RequestPageTypes.IProps) {
             <input required type="text"
               className="container create-offer__input my-8"
               placeholder="Введите название блюда"
-              name="foodName" value={userInput.foodName} onChange={handleChange}
+              name="name" value={userInput.name} onChange={handleChange}
+            />
+            <input required type="text"
+              className="container create-offer__input my-8"
+              placeholder="Опишите, что хотелось..."
+              name="description" value={userInput.description} onChange={handleChange}
             />
             <input required type="number"
               className="container create-offer__input my-8"
@@ -72,7 +81,7 @@ function CreateRequest(props: RequestPageTypes.IProps) {
             <input required type="number"
               className="container create-offer__input my-8"
               placeholder="Кол-во"
-              name="initialQuantity" value={userInput.initialQuantity} onChange={handleChange}
+              name="quantity" value={userInput.quantity} onChange={handleChange}
             />
             <p className="mt-8 mb-4 f-14 text-grey">Адрес</p>
             <YandexMap />
@@ -94,12 +103,11 @@ function CreateRequest(props: RequestPageTypes.IProps) {
 
 const mapStateToProps = (state: any) => {
   return ({
-    login: state.login,
   });
 };
 
 const mapDispatchToProps = {
-  // onCreateRequest: itemsActions.CreateRequest,
+  onCreateRequest: itemsActions.createRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateRequest);

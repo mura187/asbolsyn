@@ -5,6 +5,7 @@ const id = sessionStorage.getItem('userId');
 
 const itemsUrl = `${API_URL}api/offer`;
 const createOfferUrl = `${API_URL}api/producer/${id}/offer`;
+const createRequestUrl = `${API_URL}api/consumer/${id}/request`;
 
 export const getItems = () => (
   stdApiGET({ url: `${itemsUrl}` })
@@ -12,4 +13,7 @@ export const getItems = () => (
 
 export const createOffer = (data: any) => (
   stdApiPOST({ data, url: `${createOfferUrl}` })
+);
+export const createRequest = (data: any) => (
+  stdApiPOST({ data, url: `${createRequestUrl}` })
 );
