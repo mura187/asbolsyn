@@ -6,7 +6,7 @@ import TabBar from 'src/components/molecules/TabBar';
 
 import { PasswordPageTypes } from 'src/pages/Cabinet/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeDropper, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Password(props: PasswordPageTypes.IProps) {
   const [error, setError] = useState(false);

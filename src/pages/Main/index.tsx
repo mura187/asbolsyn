@@ -23,7 +23,7 @@ function MainPage(props: MainPageTypes.IProps) {
   return (
     <div>
       <SearchToggler link="/map" title="На карте" />
-      <CardItemGroup items={items} />
+      <CardItemGroup items={items && items} />
       <TabBar />
     </div>
   );
@@ -31,12 +31,12 @@ function MainPage(props: MainPageTypes.IProps) {
 
 const mapStateToProps = (state: any) => {
   return ({
-    items: state.itemReducer.items.data,
+    items: state.itemReducer?.items?.data,
   });
 };
 
 const mapDispatchToProps = {
   getItems: itemActions.getItems,
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Main, Cabinet, Detail, Login, Map, Offer, Password, Register } from './routes';
-// import LogoutRoute from '../components/logoutRoute';
-// import PrivateRoute from '../components/privateRoute';
+import { Main, Cabinet, Detail, Login, Map, Offer, Password, Register, Request } from './routes';
 
 const MainRoutes = () => {
   return (
@@ -15,9 +13,7 @@ const MainRoutes = () => {
       <Route path="/register" component={Register} />
       <Route path="/map" component={Map} />
       <Route path="/offer" component={Offer} />
-      {/* <PrivateRoute path="/protected" component={Protected} /> */}
-      {/* <LogoutRoute path="/logout" /> */}
-      {/* <Route path="*" component={PageNotFound} /> */}
+      <Route path="/request" component={Request} />
     </Switch>
   );
 };

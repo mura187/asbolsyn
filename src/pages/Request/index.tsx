@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { connect } from 'react-redux';
-import itemsActions from 'src/store/item/actions';
 
 import TabBar from 'src/components/molecules/TabBar';
 import YandexMap from 'src/components/molecules/YandexMap';
 
-import { OfferPageTypes } from './types';
+import { RequestPageTypes } from './types';
 import './index.scss';
 
-function CreateOffer(props: OfferPageTypes.IProps) {
+function CreateRequest(props: RequestPageTypes.IProps) {
   const token = sessionStorage.getItem('token');
   const [error, setError] = useState(false);
   const [userInput, setUserInput] = useReducer(
@@ -26,7 +25,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
       window.location.replace('/login');
     }
   });
-  const { onCreateOffer } = props;
+  const { onCreateRequest } = props;
 
   const handleChange = (e: any) => {
     const { name } = e.target;
@@ -36,7 +35,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
 
   const submitForm = (e: any) => {
     e.preventDefault();
-    onCreateOffer && onCreateOffer(
+    onCreateRequest && onCreateRequest(
       {
         food_name: userInput.foodName,
         price: parseInt(userInput.price),
@@ -55,7 +54,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
       <div className="row align-items-center justify-content-center mt-180">
         <div className="create-offer container">
           <div className="text-left">
-            <p className="container my-20 f-14">Предложите своё блюдо :)</p>
+            <p className="container my-20 f-14">Закажите блюдо :)</p>
           </div>
 
           <div className="d-flex flex-column container ">
@@ -100,7 +99,7 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = {
-  onCreateOffer: itemsActions.createOffer,
+  // onCreateRequest: itemsActions.CreateRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateOffer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateRequest);

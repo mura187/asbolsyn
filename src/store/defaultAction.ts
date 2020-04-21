@@ -72,6 +72,7 @@ export const defaultAction = (dispatch: any, getState: any , options: any, respo
                   dispatch({
                     type: options.action.failed,
                     errorMessage: `Ошибка #${response.status}`,
+                    ...options.onError({ message: 'badRequest' }),
                   });
               }
             },

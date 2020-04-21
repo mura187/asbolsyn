@@ -24,6 +24,9 @@ export const Register = loadable(() => import('src/pages/Register'), {
 export const Offer = loadable(() => import('src/pages/Offer'), {
   modules: ['offer'],
 });
+export const Request = loadable(() => import('src/pages/Request'), {
+  modules: ['request'],
+});
 
 // export const PageNotFound = loadable(() => import('../pages/pageNotFound'), {
 //   modules: ['pageNotFound'],

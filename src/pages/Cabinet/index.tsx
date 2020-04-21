@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
@@ -15,9 +15,20 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
     sessionStorage.removeItem('userId');
   };
 
+  const userType = localStorage.getItem('userType');
+  const [btnUserType, setBtnUserType] = useState(userType === 'consumer' ? 'производителя' : 'потребителя');
   const { userInfo } = props;
 
-  console.log(userInfo);
+  const changeType = () => {
+    if (userType === 'producer') {
+      localStorage.setItem('userType', 'consumer');
+      setBtnUserType('потребителя');
+    } else {
+      localStorage.setItem('userType', 'producer');
+      setBtnUserType('производителя');
+    }
+    window.location.replace('/');
+  };
 
   return (
     <div>
@@ -44,8 +55,8 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
               <p className="my-20 px-12 cursor-pointer">Сменить пароль</p>
             </div>
           </NavLink>
-          <div className="text-main border-bottom border-top cabinet__link f-15">
-            <p className="my-20 px-12 cursor-pointer">Переключиться на производителя</p>
+          <div className="text-main border-bottom border-top cabinet__link f-15" onClick={changeType}>
+            <p className="my-20 px-12 cursor-pointer">Переключиться на {btnUserType}</p>
           </div>
         </div>
       </div>
@@ -56,13 +67,8 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
 
 const mapStateToProps = (state: any) => {
   return ({
-    // items: state.itemReducer.items.data,
     userInfo: state.authReducer.userInfo,
   });
 };
 
-const mapDispatchToProps = {
-  // getItems: itemActions.getItems,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CabinetPage);
+export default connect(mapStateToProps)(CabinetPage);

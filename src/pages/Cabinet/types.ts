@@ -1,6 +1,9 @@
 export namespace CabinetPageTypes {
   export interface IProps{
     userInfo?: any;
+    userType?: string;
+    toProducer?(data: string): void;
+    toConsumer?(): void;
   }
 }
 

@@ -5,6 +5,13 @@ import { faHome, faMapMarked, faPlusSquare, faHistory, faUserCircle } from '@for
 import './index.scss';
 
 function TabBar() {
+  const createLink = () => {
+    const userType = localStorage.getItem('userType');
+    if (userType === 'consumer') {
+      return '/request';
+    } return '/offer';
+  };
+
   return(
     <div className="container tabbar d-flex flex-row justify-content-between pt-12 pb-20 fill_w">
       <NavLink to="/" activeClassName="tabbar__activeLink text-decoration-none ml-14">
@@ -23,7 +30,7 @@ function TabBar() {
           </p>
         </div>
       </NavLink>
-      <NavLink to="/offer" activeClassName="tabbar__activeLink text-decoration-none">
+      <NavLink to={createLink()} activeClassName="tabbar__activeLink text-decoration-none">
         <div className="tabbar__item text-center pb-8 px-8">
           <FontAwesomeIcon className="tabbar__item--icon ml-8 pb-4" icon={faPlusSquare} color="#00BBFF" />
           <p className="tabbar__item--center">
@@ -49,7 +56,7 @@ function TabBar() {
       </NavLink>
 
     </div>
-  )
+  );
 }
 
 export default TabBar;

@@ -11,6 +11,7 @@ export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?:
       window.location.replace('/');
       sessionStorage.setItem('token', response.Token);
       sessionStorage.setItem('userId', response.User.id);
+      localStorage.setItem('userType', 'consumer');
       return {
         user_token: response.Token,
         user_info: response.User,
