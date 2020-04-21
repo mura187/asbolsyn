@@ -15,12 +15,12 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
     sessionStorage.removeItem('userId');
   };
 
-  const userType = localStorage.getItem('userType');
-  const [btnUserType, setBtnUserType] = useState(userType === 'consumer' ? 'производителя' : 'потребителя');
+  const isConsumer = localStorage.getItem('userType') === 'consumer';
+  const [btnUserType, setBtnUserType] = useState(isConsumer ? 'производителя' : 'потребителя');
   const { userInfo } = props;
 
   const changeType = () => {
-    if (userType === 'producer') {
+    if (!isConsumer) {
       localStorage.setItem('userType', 'consumer');
       setBtnUserType('потребителя');
     } else {

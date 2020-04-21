@@ -15,3 +15,9 @@ export const CREATE_REQUEST = {
   success: 'CREATE_REQUEST_SUCCESS',
   failed: 'CREATE_REQUEST_FAILED',
 };
+
+export const GET_REQUESTS = {
+  started: 'GET_REQUESTS_START',
+  success: 'GET_REQUESTS_SUCCESS',
+  failed: 'GET_REQUESTS_FAILED',
+};

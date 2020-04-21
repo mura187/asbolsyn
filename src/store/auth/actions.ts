@@ -27,7 +27,6 @@ export const checkPhone = (data: any, callbacks: any) => (dispatch: any, getStat
     action: CHECK_PHONE,
     apiCall: () => { return api.checkPhone(data); },
     onSuccess: (response: any) => {
-      console.log('checkphone token changed to ', response.Token);
       sessionStorage.setItem('token', response.Token);
     },
     onError: (response: any) => ({ errorMessage: response.Error }),
@@ -40,7 +39,6 @@ export const checkCode = (data: any, callbacks: any) => (dispatch: any, getState
     action: CHECK_CODE,
     apiCall: () => { return api.checkCode(data); },
     onSuccess: (response: any) => {
-      console.log('checkcode - token changed to ', response.Token);
       sessionStorage.setItem('token', response.Token);
     },
     onError: (response: any) => ({ errorMessage: response.Error }),

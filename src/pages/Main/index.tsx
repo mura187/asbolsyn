@@ -8,22 +8,26 @@ import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
 import { MainPageTypes } from './types';
 
 function MainPage(props: MainPageTypes.IProps) {
-  const { items, getItems } = props;
+  const { items, requests, getItems, getRequests } = props;
   const [didMount, setDidMount] = useState(false);
+
+  const isConsumer = localStorage.getItem('userType') === 'consumer';
 
   useEffect(() => {
     if (!didMount) {
       setDidMount(true);
-      getItems && getItems();
+      isConsumer ? getItems && getItems() : getRequests && getRequests();
     }
   },
-  [didMount, getItems],
+  [didMount, getItems, getRequests, isConsumer],
   );
 
   return (
     <div>
       <SearchToggler link="/map" title="На карте" />
-      <CardItemGroup items={items && items} />
+      <CardItemGroup title={isConsumer ? 'Предложения' : 'Заявки'}
+        items={ isConsumer ? items && items : requests && requests}
+      />
       <TabBar />
     </div>
   );
@@ -32,11 +36,13 @@ function MainPage(props: MainPageTypes.IProps) {
 const mapStateToProps = (state: any) => {
   return ({
     items: state.itemReducer?.items?.data,
+    requests: state.itemReducer?.requests?.data,
   });
 };
 
 const mapDispatchToProps = {
   getItems: itemActions.getItems,
+  getRequests: itemActions.getRequests,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

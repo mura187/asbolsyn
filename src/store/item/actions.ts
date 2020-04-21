@@ -1,6 +1,6 @@
 import { defaultAction } from 'src/store/defaultAction';
 import * as api from 'src/store/item/api';
-import { GET_ITEMS, CREATE_OFFER, CREATE_REQUEST } from 'src/store/item/types';
+import { GET_ITEMS, CREATE_OFFER, CREATE_REQUEST, GET_REQUESTS } from 'src/store/item/types';
 
 export const getItems = (callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -24,10 +24,21 @@ export const createOffer = (data: any, callbacks?: any) => (dispatch?: any, getS
       return { user_token: response.Token };
     },
     onError: (response: any) => {
-      console.log('token-error');
       response.Error === "Couldn't find token" && window.location.replace('/login');
       return { user_token: response.Error };
     },
+  });
+};
+
+export const getRequests = (callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_REQUESTS,
+    apiCall: () => {
+      return api.getRequests();
+    },
+    onSuccess: (response: any) => ({ list: response }),
+    onError: (response: any) => ({ errorMessage: response.description }),
   });
 };
 
@@ -41,7 +52,6 @@ export const createRequest = (data: any, callbacks?: any) => (dispatch?: any, ge
       return { user_token: response.Token };
     },
     onError: (response: any) => {
-      console.log('token-error');
       response.Error === "Couldn't find token" && window.location.replace('/login');
       return { user_token: response.Error };
     },
@@ -51,5 +61,6 @@ export const createRequest = (data: any, callbacks?: any) => (dispatch?: any, ge
 export default{
   getItems,
   createOffer,
+  getRequests,
   createRequest,
 };
