@@ -95,9 +95,6 @@ function CreateRequest(props: RequestPageTypes.IProps) {
             <button disabled={getLocation.length === 0} onClick={submitForm}
               className="container create-offer__submit mt-16 mb-40" type="submit">Создать
             </button>
-            <button onClick={submitForm}
-              className="container create-offer__submit mt-16 mb-40" type="submit">Создать
-            </button>
             {error &&
               <div className="text-left text-danger">
                 <p className="container px-36 mb-16 f-14">Произошла ошибка, повторите еще раз или позже</p>
