@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { connect } from 'react-redux';
 import itemsActions from 'src/store/item/actions';
+import useForceUpdate from 'use-force-update';
 
 import TabBar from 'src/components/molecules/TabBar';
 import YandexMap from 'src/components/molecules/YandexMap';
@@ -20,7 +21,11 @@ function CreateOffer(props: OfferPageTypes.IProps) {
       location: '',
     },
   );
-  const getLocation = sessionStorage.getItem('location') || '';
+
+  const forceUpdate = useForceUpdate();
+
+  const getLocation = localStorage.getItem('location') || '';
+  console.log('g', getLocation.length)
   useEffect(() => {
     if (token === null) {
       window.location.replace('/login');
@@ -77,7 +82,11 @@ function CreateOffer(props: OfferPageTypes.IProps) {
             />
             <p className="mt-8 mb-4 f-14 text-grey">Адрес</p>
             <YandexMap />
-            <button onClick={submitForm}
+
+            <button onClick={() => forceUpdate()} className="container mt-16 mb-40">
+              Подтвердить адрес
+            </button>
+            <button disabled={getLocation.length === 0} onClick={submitForm}
               className="container create-offer__submit mt-16 mb-40" type="submit">Создать
             </button>
             {error &&
