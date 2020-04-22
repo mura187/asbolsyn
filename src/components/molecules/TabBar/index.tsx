@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faMapMarked, faPlusSquare, faHistory, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMoneyBill, faPlusSquare, faHistory, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 
 function TabBar() {
@@ -22,11 +22,11 @@ function TabBar() {
           </p>
         </div>
       </NavLink>
-      <NavLink to="/map" activeClassName="tabbar__activeLink text-decoration-none">
+      <NavLink to="/deal" activeClassName="tabbar__activeLink text-decoration-none">
         <div className="tabbar__item text-center pb-8 px-8">
-          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faMapMarked} color="" />
+          <FontAwesomeIcon className="tabbar__item--icon pb-4" icon={faMoneyBill} color="" />
           <p>
-            Карта
+            Сделки
           </p>
         </div>
       </NavLink>

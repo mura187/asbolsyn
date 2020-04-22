@@ -3,10 +3,13 @@ import Moment from 'react-moment';
 import 'moment/locale/ru';
 import { CardItemTypes } from 'src/components/molecules/CardItem/types';
 import './index.scss';
+import { NavLink } from 'react-router-dom';
 
 function CardItem(props: CardItemTypes.IProps) {
   const {
+    id,
     producerName,
+    producerId,
     consumerName,
     foodName,
     price,
@@ -21,7 +24,9 @@ function CardItem(props: CardItemTypes.IProps) {
       <div className="card-item base-shadow d-flex flex-column container my-10">
         <div className="d-flex flex-row justify-content-between p-12">
           <h2 className="card-item__price">{price} ₸</h2>
-          <p className="card-item__username text-grey text-right f-12">@{producerName || consumerName}</p>
+          <NavLink to={`/?user=${producerId}`}>
+            <p className="card-item__username text-grey text-right f-12">@{producerName || consumerName}</p>
+          </NavLink>
         </div>
         <div className="d-flex flex-column p-12">
           <h3 className="card-item__title my-4">{foodName}<br/></h3>
