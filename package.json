@@ -25,6 +25,7 @@
     "loadable-components": "^2.2.3",
     "moment-timezone": "^0.5.28",
     "node-sass": "^4.13.1",
+    "pm2": "^4.3.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-i18next": "^11.3.3",
