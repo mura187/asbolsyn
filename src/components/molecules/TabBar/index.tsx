@@ -38,7 +38,7 @@ function TabBar() {
           </p>
         </div>
       </NavLink>
-      <NavLink to="/login" activeClassName="tabbar__activeLink text-decoration-none">
+      <NavLink to="" activeClassName="tabbar__activeLink text-decoration-none blured">
         <div className="tabbar__item text-center pb-8 px-8">
           <FontAwesomeIcon className="tabbar__item--icon ml-8 pb-4" icon={faHistory} color="" />
           <p>

@@ -21,7 +21,7 @@ function CardItem(props: CardItemTypes.IProps) {
       <div className="card-item base-shadow d-flex flex-column container my-10">
         <div className="d-flex flex-row justify-content-between p-12">
           <h2 className="card-item__price">{price} ₸</h2>
-          <p className="text-grey text-right f-12">@{producerName || consumerName}</p>
+          <p className="card-item__username text-grey text-right f-12">@{producerName || consumerName}</p>
         </div>
         <div className="d-flex flex-column p-12">
           <h3 className="card-item__title my-4">{foodName}<br/></h3>

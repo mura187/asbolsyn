@@ -22,11 +22,24 @@ function MainPage(props: MainPageTypes.IProps) {
   [didMount, getItems, getRequests, isConsumer],
   );
 
+  const getParams = new URLSearchParams(`${window.location.search}`);
+  const paramsUser = getParams.get('user') || '';
+  const myId = sessionStorage.getItem('userId') || '';
+  const urlParams = window.location.search.substr(1).split('=')[0];
+
+  const fromUser = (x: number) => {
+    return items.filter((n: any) => n.producerId === x);
+  };
+
   return (
     <div>
       <SearchToggler link="/map" title="На карте" />
       <CardItemGroup title={isConsumer ? 'Предложения' : 'Заявки'}
-        items={ isConsumer ? items && items : requests && requests}
+        items={ urlParams === 'my_items' ? fromUser(parseInt(myId, 10)) :
+          isConsumer ? urlParams === 'user' ? fromUser(parseInt(paramsUser, 10)) :
+            items && items :
+            requests && requests
+        }
       />
       <TabBar />
     </div>

@@ -20,7 +20,7 @@ function SearchToggler(props: SearchTogglerTypes.IProps) {
           </NavLink>
         </div>
         <div className="p-12 fill_w text-center">
-          <p className="fill_w">
+          <p className="fill_w text-grey">
             Фильтры
               <FontAwesomeIcon className="ml-8" color="#888888" icon={faFilter} />
           </p>

@@ -44,11 +44,13 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
           <p onClick={logout} className="text-danger my-15 cursor-pointer">Выход</p>
         </div>
         <div className="d-flex justify-content-between flex-column">
+        <NavLink className="text-decoration-none" to="/?my_items">
           <div className="text-main border-top cabinet__link f-15">
-            <p className="my-20 px-12 cursor-pointer">Мои текущие заявки</p>
+            <p className="my-20 px-12 cursor-pointer">Мои текущие предложения</p>
           </div>
+        </NavLink>
           <div className="text-main border-top cabinet__link f-15">
-            <p className="my-20 px-12 cursor-pointer">История</p>
+            <p className="my-20 px-12 cursor-pointer text-grey">История</p>
           </div>
           <NavLink className="text-decoration-none" to="/cabinet/password">
             <div className="text-main border-top cabinet__link f-15">

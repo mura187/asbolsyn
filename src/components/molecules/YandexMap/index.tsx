@@ -8,7 +8,7 @@ function YandexMap() {
 
   const onMapClick = (event: any) => {
     setCoords(event.get('coords'));
-    sessionStorage.setItem('location', JSON.stringify(coords));
+    localStorage.setItem('location', JSON.stringify(coords));
   };
 
   return (
