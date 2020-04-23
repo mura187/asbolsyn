@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import itemsActions from 'src/store/item/actions';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -16,9 +17,10 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
     sessionStorage.removeItem('userId');
   };
 
+  const [didMount, setDidMount] = useState(false);
   const isConsumer = localStorage.getItem('userType') === 'consumer';
   const [btnUserType, setBtnUserType] = useState(isConsumer ? 'производителя' : 'потребителя');
-  const { userInfo, myItems } = props;
+  const { userInfo, myItems, myRequests, getMyRequests, getMyItems } = props;
 
   const changeType = () => {
     if (!isConsumer) {
@@ -30,6 +32,17 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
     }
     window.location.reload();
   };
+
+  const isProducer = localStorage.getItem('userType') === 'consumer';
+
+  useEffect(() => {
+    if (!didMount) {
+      setDidMount(true);
+      isProducer ? getMyItems && getMyItems() : getMyRequests && getMyRequests();
+    }
+  },
+    [didMount, isProducer, getMyItems, getMyRequests],
+  );
 
   return (
     <div>
@@ -54,7 +67,7 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
         <NavLink className="text-decoration-none" to={myItems.length === 0 ? '#' : '/detail'}>
           <div className="d-flex flex-row justify-content-between  border-top cabinet__link f-15">
             <p className={classNames(['my-20 cursor-pointer', myItems.length === 0 ? 'text-grey' : 'text-main'])}>
-              Редактировать предложения ({myItems.length})</p>
+              Редактировать { !isProducer ? 'предложения' : 'заказы'} ({!isProducer ? myItems.length : myRequests.length})</p>
               <FontAwesomeIcon className="f-15 mr-20 align-self-center text-black" icon={faChevronRight} />
           </div>
         </NavLink>
@@ -83,7 +96,13 @@ const mapStateToProps = (state: any) => {
   return ({
     userInfo: state.authReducer.userInfo,
     myItems: state.itemReducer.myItems.data,
+    myRequests: state.itemReducer.myRequests.data,
   });
 };
 
-export default connect(mapStateToProps)(CabinetPage);
+const mapDispatchToProps = {
+  getMyItems: itemsActions.getMyItems,
+  getMyRequests: itemsActions.getMyRequests,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CabinetPage);

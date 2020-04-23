@@ -21,7 +21,7 @@ function DetailPage(props: DetailPageTypes.IProps) {
 
   const { onUpdateItem, onUpdateRequest, getMyItems, myItems, myRequests, getMyRequests } = props;
 
-  const isProducer = localStorage.getItem('userType') === 'consumer';
+  const isProducer = localStorage.getItem('userType') === 'producer';
   const userId = sessionStorage.getItem('userId') || '';
   const offerId = curItem;
 
@@ -55,6 +55,7 @@ function DetailPage(props: DetailPageTypes.IProps) {
         food_name: userInput.foodName,
         price: parseInt(userInput.price, 10),
         quantity: parseInt(userInput.availableQuantity, 10),
+        description: userInput.description,
       },
       userId,
       offerId,
