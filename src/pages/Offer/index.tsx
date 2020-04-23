@@ -58,7 +58,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
     <div>
       <h1 className="main-logo text-center f-32">As Bolsyn</h1>
       <div className="row align-items-center justify-content-center mt-180">
-        <div className="create-offer container">
+        <div className="create-offer">
           <div className="text-left">
             <p className="container my-20 f-14">Предложите своё блюдо :)</p>
           </div>

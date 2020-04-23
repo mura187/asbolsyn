@@ -9,6 +9,11 @@ body, html {
   height: 100%;
 }
 
+.main-logo{
+  position: relative;
+  top: 120px; 
+}
+
 .position-relative {
   position: relative!important;
 }
@@ -57,6 +62,7 @@ body, html {
 
 .blured {
   filter: blur(2px)!important;
+  pointer-events: none;
 }
 
 .border-bottom {

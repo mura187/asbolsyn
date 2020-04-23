@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ActionType, ILoadTypes } from 'src/store/types';
-import { GET_ITEMS, GET_REQUESTS } from 'src/store/item/types';
+import { GET_ITEMS, GET_REQUESTS, GET_MY_ITEMS } from 'src/store/item/types';
 import { IItem } from 'src/store/data.types';
 import { CardItemTypes } from 'src/components/molecules/CardItem/types';
 
@@ -45,6 +45,35 @@ const items = (
       const parsedData = action.list.map((n: IItem) => parseItemsData(n));
       return {
         data: parsedData,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+const myItems = (state = { data: [], loading: false }, action: any) => {
+  switch (action.type) {
+    case GET_MY_ITEMS.started:
+      return {
+        data: [],
+        loading: true,
+      };
+    case GET_MY_ITEMS.failed:
+      return {
+        data: [],
+        errorMessage: action.errorMessage,
+        loading: false,
+      };
+    case GET_MY_ITEMS.success:
+      if (!action.myItems) {
+        return {
+          data: [],
+          loading: false,
+        };
+      }
+      return {
+        data: action.myItems,
         loading: false,
       };
     default:
@@ -122,9 +151,9 @@ const requests = (
   }
 };
 
-
 const itemReducer = combineReducers({
   items,
+  myItems,
   requests,
   places,
 });

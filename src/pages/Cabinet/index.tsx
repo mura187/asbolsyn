@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import TabBar from 'src/components/molecules/TabBar';
@@ -17,7 +18,7 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
 
   const isConsumer = localStorage.getItem('userType') === 'consumer';
   const [btnUserType, setBtnUserType] = useState(isConsumer ? 'производителя' : 'потребителя');
-  const { userInfo } = props;
+  const { userInfo, myItems } = props;
 
   const changeType = () => {
     if (!isConsumer) {
@@ -49,6 +50,12 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
             <p className="my-20 px-12 cursor-pointer">Мои текущие предложения</p>
           </div>
         </NavLink>
+        <NavLink className="text-decoration-none" to={myItems.length === 0 ? '#' : '/detail'}>
+          <div className="border-top cabinet__link f-15">
+            <p className={classNames(['my-20 px-12 cursor-pointer', myItems.length === 0 ? 'text-grey' : 'text-main'])}>
+              Редактировать предложения ({myItems.length})</p>
+          </div>
+        </NavLink>
           <div className="text-main border-top cabinet__link f-15">
             <p className="my-20 px-12 cursor-pointer text-grey">История</p>
           </div>
@@ -70,6 +77,7 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
 const mapStateToProps = (state: any) => {
   return ({
     userInfo: state.authReducer.userInfo,
+    myItems: state.itemReducer.myItems.data,
   });
 };
 

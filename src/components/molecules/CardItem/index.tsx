@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom';
 
 function CardItem(props: CardItemTypes.IProps) {
   const {
-    id,
     producerName,
     producerId,
     consumerName,
