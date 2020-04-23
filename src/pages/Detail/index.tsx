@@ -8,26 +8,30 @@ import './index.scss';
 function DetailPage(props: DetailPageTypes.IProps) {
   const [didMount, setDidMount] = useState(false);
   const [curItem, setCurItem] = useState('');
-  const { onUpdateItem, getMyItems, myItems } = props;
-
-  const userId = sessionStorage.getItem('userId') || '';
-  const offerId = curItem;
+  const [curKey, setCurKey] = useState('');
   const [userInput, setUserInput] = useReducer(
     (state: any, newState: any) => ({ ...state, ...newState }),
     {
       foodName: '',
       price: null,
+      description: '',
       availableQuantity: null,
     },
   );
 
+  const { onUpdateItem, onUpdateRequest, getMyItems, myItems, myRequests, getMyRequests } = props;
+
+  const isProducer = localStorage.getItem('userType') === 'consumer';
+  const userId = sessionStorage.getItem('userId') || '';
+  const offerId = curItem;
+
   useEffect(() => {
     if (!didMount) {
       setDidMount(true);
-      getMyItems && getMyItems();
+      isProducer ? getMyItems && getMyItems() : getMyRequests && getMyRequests();
     }
   },
-    [getMyItems, didMount],
+    [didMount, isProducer, getMyItems, getMyRequests],
   );
 
   const handleChange = (e: any) => {
@@ -37,6 +41,7 @@ function DetailPage(props: DetailPageTypes.IProps) {
   };
 
   const updateItem = () => {
+    isProducer ?
     onUpdateItem && onUpdateItem(
       {
         food_name: userInput.foodName,
@@ -45,41 +50,64 @@ function DetailPage(props: DetailPageTypes.IProps) {
       },
       userId,
       offerId,
+    ) : onUpdateRequest && onUpdateRequest(
+      {
+        food_name: userInput.foodName,
+        price: parseInt(userInput.price, 10),
+        quantity: parseInt(userInput.availableQuantity, 10),
+      },
+      userId,
+      offerId,
     );
   };
-  console.log('a', myItems);
 
   const onHandleChangeType = (e: any) => {
-    setCurItem(e.target.value);
-    console.log('newvalue', curItem);
+    const data = e.target.value;
+    setCurItem(data.split(' ')[1]);
+    setCurKey(data.split(' ')[0]);
   };
 
   return (<>
     <h1 className="main-logo text-center f-32">As Bolsyn</h1>
     <div className="edit-page container bg-white base-shadow mt-180">
       <div className="text-left">
-        <p className="f-14 py-20">{myItems.length === 0 ? 'У вас нет активных предложений' : 'Обновите своё блюдо :)'} </p>
+        <p className="f-14 py-20">
+          Редактировать {isProducer ? 'предложение' : 'заказ'}
+        </p>
       </div>
       <div className={myItems.length === 0 ? 'blured' : ''}>
-        <select className="edit-page__select my-8" onChange={onHandleChangeType}>
+        <select className="edit-page__select my-8 fill_w" onChange={onHandleChangeType}>
           <option value="" disabled selected>Выберите для ред.</option>
-          {myItems.map((n: any) =>
-            <option value={n.id}>#{n.id} {n.food_name} {n.price}₸ ({n.available_quantity} порции)</option>,
+          {isProducer && myItems.map((n: any, i: any) =>
+            <option value={`${i} ${n.id}` }>#{n.id} {n.food_name} {n.price} ₸ ({n.available_quantity} порции)</option>,
+          )}
+          {!isProducer && myRequests.map((n: any, i: any) =>
+            <option value={`${i} ${n.id}` } key={i}>#{n.id} {n.food_name} {n.price} ₸ ({n.quantity} порции)</option>,
           )}
         </select>
         <input required type="text"
           className="container create-offer__input my-8"
-          placeholder="Изменить название блюда"
+          placeholder={curItem.length === 0 ? 'Изменить название блюда' :
+          !isProducer ? myRequests[parseInt(curKey, 10)].food_name : myItems[parseInt(curKey, 10)].food_name }
           name="foodName" value={userInput.foodName} onChange={handleChange}
         />
+        {!isProducer &&
+          <input required type="text"
+            className="container create-offer__input my-8"
+            placeholder={curItem.length === 0 ? 'Изменить описание' : myRequests[parseInt(curKey, 10)].description}
+            name="description" value={userInput.description} onChange={handleChange}
+        />
+        }
         <input required type="number"
           className="container create-offer__input my-8"
-          placeholder="Изменить цену"
+          placeholder={curItem.length === 0 ? 'Изменить цену' :
+          `${!isProducer ? myRequests[parseInt(curKey, 10)].price : myItems[parseInt(curKey, 10)].price} ₸` }
           name="price" value={userInput.price} onChange={handleChange}
         />
         <input required type="number"
           className="container create-offer__input my-8"
-          placeholder="Изменить кол-во"
+          placeholder={curItem.length === 0 ? 'Изменить кол-во' :
+          `${!isProducer ? myRequests[parseInt(curKey, 10)].quantity : myItems[parseInt(curKey, 10)].available_quantity} порции` }
           name="availableQuantity" value={userInput.availableQuantity} onChange={handleChange}
         />
         <button disabled={curItem.length === 0} onClick={updateItem}
@@ -94,12 +122,15 @@ function DetailPage(props: DetailPageTypes.IProps) {
 const mapStateToProps = (state: any) => {
   return ({
     myItems: state.itemReducer.myItems.data,
+    myRequests: state.itemReducer.myRequests.data,
   });
 };
 
 const mapDispatchToProps = {
   onUpdateItem: itemsActions.updateItem,
+  onUpdateRequest: itemsActions.updateRequest,
   getMyItems: itemsActions.getMyItems,
+  getMyRequests: itemsActions.getMyRequests,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);

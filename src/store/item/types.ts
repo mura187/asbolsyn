@@ -33,3 +33,16 @@ export const GET_REQUESTS = {
   success: 'GET_REQUESTS_SUCCESS',
   failed: 'GET_REQUESTS_FAILED',
 };
+
+export const GET_MY_REQUESTS = {
+  started: 'GET_MY_REQUESTS_START',
+  success: 'GET_MY_REQUESTS_SUCCESS',
+  failed: 'GET_MY_REQUESTS_FAILED',
+};
+
+
+export const UPDATE_REQUEST = {
+  started: 'UPDATE_REQUEST_START',
+  success: 'UPDATE_REQUEST_SUCCESS',
+  failed: 'UPDATE_REQUEST_FAILED',
+};

@@ -25,7 +25,6 @@ function CreateOffer(props: OfferPageTypes.IProps) {
   const forceUpdate = useForceUpdate();
 
   const getLocation = localStorage.getItem('location') || '';
-  console.log('g', getLocation.length)
   useEffect(() => {
     if (token === null) {
       window.location.replace('/login');
