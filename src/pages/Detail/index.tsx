@@ -1,4 +1,5 @@
 import React, { useReducer, useState, useEffect } from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import itemsActions from 'src/store/item/actions';
 import TabBar from 'src/components/molecules/TabBar';
@@ -76,7 +77,11 @@ function DetailPage(props: DetailPageTypes.IProps) {
           Редактировать {isProducer ? 'предложение' : 'заказ'}
         </p>
       </div>
-      <div className={myItems.length === 0 ? 'blured' : ''}>
+      {/* <div className={myItems.length !== 0 || myRequests.length !== 0 ? '' : 'blured'}> */}
+      <div className={classNames([(
+        isProducer && myItems.length === 0) && 'blured',
+        !isProducer && myRequests.length === 0 && 'blured'],
+      )}>
         <select className="edit-page__select my-8 fill_w" onChange={onHandleChangeType}>
           <option value="" disabled selected>Выберите для ред.</option>
           {isProducer && myItems.map((n: any, i: any) =>

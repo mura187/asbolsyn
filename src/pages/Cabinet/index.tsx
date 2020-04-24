@@ -64,10 +64,13 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
             <FontAwesomeIcon className="f-15 mr-20 align-self-center text-black" icon={faChevronRight} />
           </div>
         </NavLink>
-        <NavLink className="text-decoration-none" to={myItems.length === 0 ? '#' : '/detail'}>
+        <NavLink className="text-decoration-none" to={
+          (!isProducer && myItems.length === 0) ? '#' : (isProducer && myRequests.length === 0) ? '#' : '/detail'}>
           <div className="d-flex flex-row justify-content-between  border-top cabinet__link f-15">
-            <p className={classNames(['my-20 cursor-pointer', myItems.length === 0 ? 'text-grey' : 'text-main'])}>
-              Редактировать { !isProducer ? 'предложения' : 'заказы'} ({!isProducer ? myItems.length : myRequests.length})</p>
+            <p className={classNames(['my-20 cursor-pointer',
+              (!isProducer && myItems.length === 0) ? 'text-grey' : (isProducer && myRequests.length === 0) ? 'text-grey' : 'text-main'])}
+            > Редактировать { !isProducer ? 'предложения' : 'заказы'} (
+              {!isProducer ? myItems.length : myRequests.length})</p>
               <FontAwesomeIcon className="f-15 mr-20 align-self-center text-black" icon={faChevronRight} />
           </div>
         </NavLink>

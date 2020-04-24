@@ -73,7 +73,7 @@ function CreateRequest(props: RequestPageTypes.IProps) {
             />
             <input required type="text"
               className="container create-offer__input my-8"
-              placeholder="Опишите, что хотелось..."
+              placeholder="Опишите подробнее, что хотелось..."
               name="description" value={userInput.description} onChange={handleChange}
             />
             <input required type="number"
