@@ -1,5 +1,5 @@
 import { API_URL } from 'src/constants/server';
-import { stdApiGET, stdApiPOST, stdApiPUT } from 'src/store/defaultApi';
+import { stdApiGET, stdApiPOST, stdApiPUT, stdApiDELETE } from 'src/store/defaultApi';
 
 const id = sessionStorage.getItem('userId');
 
@@ -37,6 +37,14 @@ export const updateItem = (data: any, producerId: string, offerId: string) => (
   stdApiPUT({ data, url: `${API_URL}api/producer/${producerId}/offer/${offerId}` })
 );
 
+export const deleteItem = (producerId: string, offerId: string) => (
+  stdApiDELETE({ url: `${API_URL}api/producer/${producerId}/offer/${offerId}` })
+);
+
 export const updateRequest = (data: any, consumerId: string, requestId: string) => (
   stdApiPUT({ data, url: `${API_URL}api/consumer/${consumerId}/request/${requestId}` })
+);
+
+export const deleteRequest = (consumerId: string, requestId: string) => (
+  stdApiDELETE({ url: `${API_URL}api/consumer/${consumerId}/request/${requestId}` })
 );

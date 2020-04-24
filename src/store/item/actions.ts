@@ -6,9 +6,12 @@ import {
   CREATE_REQUEST,
   GET_REQUESTS,
   UPDATE_OFFER,
-  GET_MY_ITEMS, 
+  GET_MY_ITEMS,
   UPDATE_REQUEST,
-  GET_MY_REQUESTS} from 'src/store/item/types';
+  GET_MY_REQUESTS,
+  DELETE_OFFER,
+  DELETE_REQUEST,
+} from 'src/store/item/types';
 
 export const getItems = (callbacks?: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
@@ -122,6 +125,29 @@ export const getMyRequests = (callbacks?: any) => (dispatch: any, getState: any)
   });
 };
 
+export const deleteItem = (producerId: string, offerId: string, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_OFFER,
+    apiCall: () => {
+      return api.deleteItem(producerId, offerId);
+    },
+    onSuccess: () => window.location.reload(),
+    onError: (response: any) => ({ errorMessage: response }),
+  });
+};
+
+export const deleteRequest = (consumerId: string, requestId: string, callbacks?: any) => (dispatch: any, getState: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: DELETE_REQUEST,
+    apiCall: () => {
+      return api.deleteRequest(consumerId, requestId);
+    },
+    onSuccess: () => window.location.reload(),
+    onError: (response: any) => ({ errorMessage: response }),
+  });
+};
 export default{
   getItems,
   getMyItems,
@@ -131,4 +157,6 @@ export default{
   createRequest,
   updateItem,
   updateRequest,
+  deleteItem,
+  deleteRequest,
 };

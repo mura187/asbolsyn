@@ -58,3 +58,14 @@ export const stdApiPUT = (options: any) => {
     )
   );
 };
+
+export const stdApiDELETE = (options: any) => (
+  fetch(
+    options.url,
+    {
+      method: 'DELETE',
+      headers: modifyHeader(options),
+      body: JSON.stringify(options.data || {}),
+    },
+  )
+);

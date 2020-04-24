@@ -1,7 +1,10 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faTimes } from '@fortawesome/free-solid-svg-icons';
 import itemsActions from 'src/store/item/actions';
+import Button from 'src/components/atoms/Button';
 import TabBar from 'src/components/molecules/TabBar';
 import { DetailPageTypes } from './types';
 import './index.scss';
@@ -10,6 +13,7 @@ function DetailPage(props: DetailPageTypes.IProps) {
   const [didMount, setDidMount] = useState(false);
   const [curItem, setCurItem] = useState('');
   const [curKey, setCurKey] = useState('');
+  const [modal, showModal] = useState(false);
   const [userInput, setUserInput] = useReducer(
     (state: any, newState: any) => ({ ...state, ...newState }),
     {
@@ -20,7 +24,10 @@ function DetailPage(props: DetailPageTypes.IProps) {
     },
   );
 
-  const { onUpdateItem, onUpdateRequest, getMyItems, myItems, myRequests, getMyRequests } = props;
+  const { onUpdateItem, onUpdateRequest,
+    onDeleteItem, onDeleteRequest,
+    getMyItems, getMyRequests,
+    myItems, myRequests } = props;
 
   const isProducer = localStorage.getItem('userType') === 'producer';
   const userId = sessionStorage.getItem('userId') || '';
@@ -39,6 +46,10 @@ function DetailPage(props: DetailPageTypes.IProps) {
     const { name } = e.target;
     const newValue = e.target.value;
     setUserInput({ [name]: newValue });
+  };
+
+  const deleteItem = () => {
+    isProducer ? onDeleteItem && onDeleteItem(userId, offerId) : onDeleteRequest && onDeleteRequest(userId, offerId);
   };
 
   const updateItem = () => {
@@ -72,12 +83,35 @@ function DetailPage(props: DetailPageTypes.IProps) {
   return (<>
     <h1 className="main-logo text-center f-32">As Bolsyn</h1>
     <div className="edit-page container bg-white base-shadow mt-180">
-      <div className="text-left">
+      <div className="d-flex flex-row justify-content-between text-left">
         <p className="f-14 py-20">
           Редактировать {isProducer ? 'предложение' : 'заказ'}
         </p>
+        {modal &&
+          <div className="show-modal-wrap">
+            <div className="show-modal">
+              <div className="show-modal__content mb-90">
+                <div className="container d-flex flex-column bg-white base-radius">
+                  <div className="d-flex flex-row justify-content-between border-bottom">
+                    <h3 className="my-16 f-16">Подтвердить удаление</h3>
+                    <button onClick={() => showModal(false)} className="show-modal_close f-17">
+                      <FontAwesomeIcon className="text-grey align-self-center" icon={faTimes} />
+                    </button>
+                  </div>
+                  <p className="f-14 text-grey my-32">Хотите удалить предложение?</p>
+                  <button onClick={deleteItem} disabled={curItem.length === 0} className="fill_w px-12 mb-32 btn-lg btn-danger text-danger text-center cursor-pointer">
+                    <p className="text-center">Удалить</p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <Button onClick={() => showModal(true)} disabled={curItem.length === 0} classNames="p-12 btn-danger text-danger text-decoration-underline align-self-center cursor-pointer">
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
       </div>
-      {/* <div className={myItems.length !== 0 || myRequests.length !== 0 ? '' : 'blured'}> */}
       <div className={classNames([(
         isProducer && myItems.length === 0) && 'blured',
         !isProducer && myRequests.length === 0 && 'blured'],
@@ -137,6 +171,8 @@ const mapDispatchToProps = {
   onUpdateRequest: itemsActions.updateRequest,
   getMyItems: itemsActions.getMyItems,
   getMyRequests: itemsActions.getMyRequests,
+  onDeleteItem: itemsActions.deleteItem,
+  onDeleteRequest: itemsActions.deleteRequest,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);
