@@ -34,3 +34,21 @@ export const REGISTER = {
   success: 'REGISTER_SUCCESS',
   failed: 'REGISTER_FAILED',
 };
+
+export const RECOVER_CHECK_LOGIN = {
+  started: 'RECOVER_CHECK_LOGIN_START',
+  success: 'RECOVER_CHECK_LOGIN_SUCCESS',
+  failed: 'RECOVER_CHECK_LOGIN_FAILED',
+};
+
+export const RECOVER_CHECK_CODE = {
+  started: 'RECOVER_CHECK_CODE_START',
+  success: 'RECOVER_CHECK_CODE_SUCCESS',
+  failed: 'RECOVER_CHECK_CODE_FAILED',
+};
+
+export const RECOVER_NEW_PASSWORD = {
+  started: 'RECOVER_NEW_PASSWORD_START',
+  success: 'RECOVER_NEW_PASSWORD_SUCCESS',
+  failed: 'RECOVER_NEW_PASSWORD_FAILED',
+};

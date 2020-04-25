@@ -107,7 +107,7 @@ function Register(props:LoginPageTypes.IProps) {
               />
               {requiredField &&
                 <div className="text-left text-danger">
-                  <p className="container px-36 my-4 f-14">Это поле обязательно</p>
+                  <p className="my-4 f-14">Это поле обязательно</p>
                 </div>
               }
               {validPhone && <>
@@ -169,12 +169,6 @@ function Register(props:LoginPageTypes.IProps) {
     </div>
   );
 }
-
-// const mapStateToProps = (state: any) => {
-//   return ({
-//     login: state.login,
-//   });
-// };
 
 const mapDispatchToProps = {
   onCheckPhone: authActions.checkPhone,

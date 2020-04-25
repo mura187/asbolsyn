@@ -18,6 +18,9 @@ export const Detail = loadable(() => import('src/pages/Detail'), {
 export const Login = loadable(() => import('src/pages/Login'), {
   modules: ['login'],
 });
+export const Forgot = loadable(() => import('src/pages/Login/forgot'), {
+  modules: ['login/forgot'],
+});
 export const Register = loadable(() => import('src/pages/Register'), {
   modules: ['register'],
 });

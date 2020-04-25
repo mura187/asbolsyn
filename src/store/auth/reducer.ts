@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ILoadTypes } from 'src/store/types';
-import { GET_USER, LOGIN, UPDATE_PASSWORD } from './types';
+import { GET_USER, LOGIN, UPDATE_PASSWORD, RECOVER_CHECK_LOGIN } from './types';
 
 const user = (
     state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
@@ -68,11 +68,23 @@ const errorPassword = (state = null, action: any) => {
   }
 };
 
+const userNumber = (state = null, action: any) => {
+  switch (action.type) {
+    case RECOVER_CHECK_LOGIN.success:
+      return (action.number || null);
+    case RECOVER_CHECK_LOGIN.failed:
+      return (action.errorMessage || null);
+    default:
+      return state;
+  }
+};
+
 const authReducer = combineReducers({
   user,
   userToken,
   userInfo,
   errorPassword,
+  userNumber,
 });
 
 export default authReducer;

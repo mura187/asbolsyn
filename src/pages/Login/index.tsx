@@ -61,7 +61,7 @@ function Login(props:LoginPageTypes.IProps) {
             />
             {requiredField &&
               <div className="text-left text-danger">
-                <p className="container px-36 my-4 f-14">Это поле обязательно</p>
+                <p className="my-4 f-14">Это поле обязательно</p>
               </div>
             }
             {validUsername &&
@@ -80,6 +80,7 @@ function Login(props:LoginPageTypes.IProps) {
               </div>
             }
             {!validUsername && <>
+              <NavLink className="text-main text-center mt-8 mb-16 f-13" to="/login/forgot">Забыли пароль?</NavLink>
               <p className="text-center f-12 my-4">Ещё не зарегистрированы?</p>
               <NavLink className="text-main text-center mt-8 mb-16 f-13" to="/register">Зарегистрироваться</NavLink>
             </>

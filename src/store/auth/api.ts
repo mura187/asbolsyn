@@ -3,11 +3,19 @@ import { stdApiPOST, stdApiPUT } from 'src/store/defaultApi';
 
 const id = sessionStorage.getItem('userId');
 
+// Login
 const authUrl = `${API_URL}api/user/login`;
+
+// Register
 const checkPhoneUrl = `${API_URL}api/user/checkphone`;
 const checkCodeUrl =  `${API_URL}api/user/checkcode`;
 const updatePasswordUrl = `${API_URL}api/user/${id}/changepassword`;
 const registerUrl =  `${API_URL}api/user/registration`;
+
+// Forgot Recover password
+const recoverCheckLoginUrl = `${API_URL}api/user/forgot/login`;
+const recoverCheckCodeUrl =  `${API_URL}api/user/forgot/checkcode`;
+const recoverNewPasswordUrl =  `${API_URL}api/user/forgot/newpassword`;
 
 export const login = (data: any) => (
     stdApiPOST({ data, url: authUrl })
@@ -27,4 +35,16 @@ export const register = (data: any) => (
 
 export const updatePassword = (data: any) => (
   stdApiPUT({ data, url: updatePasswordUrl })
+);
+
+export const recoverCheckLogin = (data: any) => (
+  stdApiPOST({ data, url: recoverCheckLoginUrl })
+);
+
+export const recoverCheckCode = (data: any) => (
+  stdApiPOST({ data, url: recoverCheckCodeUrl })
+);
+
+export const recoverNewPassword = (data: any) => (
+  stdApiPOST({ data, url: recoverNewPasswordUrl })
 );
