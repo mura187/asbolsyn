@@ -9,7 +9,6 @@ import { CabinetPageTypes } from './types';
 import { NavLink } from 'react-router-dom';
 
 function CabinetPage(props: CabinetPageTypes.IProps) {
-  !sessionStorage.hasOwnProperty('userId') && window.location.replace('/login');
 
   const logout = () => {
     window.location.replace('/');
@@ -38,7 +37,8 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
   useEffect(() => {
     if (!didMount) {
       setDidMount(true);
-      isProducer ? getMyItems && getMyItems() : getMyRequests && getMyRequests();
+      getMyItems && getMyItems();
+      getMyRequests && getMyRequests();
     }
   },
     [didMount, isProducer, getMyItems, getMyRequests],

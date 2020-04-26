@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useReducer } from 'react';
 import { connect } from 'react-redux';
 import itemsActions from 'src/store/item/actions';
 import useForceUpdate from 'use-force-update';
@@ -10,7 +10,6 @@ import { OfferPageTypes } from './types';
 import './index.scss';
 
 function CreateOffer(props: OfferPageTypes.IProps) {
-  const token = sessionStorage.getItem('token');
   const [error, setError] = useState(false);
   const [userInput, setUserInput] = useReducer(
     (state: any, newState: any) => ({ ...state, ...newState }),
@@ -25,11 +24,6 @@ function CreateOffer(props: OfferPageTypes.IProps) {
   const forceUpdate = useForceUpdate();
 
   const getLocation = localStorage.getItem('location') || '';
-  useEffect(() => {
-    if (token === null) {
-      window.location.replace('/login');
-    }
-  });
   const { onCreateOffer } = props;
 
   const handleChange = (e: any) => {
