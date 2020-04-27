@@ -17,6 +17,12 @@ export const UPDATE_PASSWORD = {
   failed: 'UPDATE_PASSWORD_FAILED',
 };
 
+export const UPDATE_PROFILE = {
+  started: 'UPDATE_PROFILE_START',
+  success: 'UPDATE_PROFILE_SUCCESS',
+  failed: 'UPDATE_PROFILE_FAILED',
+};
+
 export const CHECK_PHONE = {
   started: 'CHECK_PHONE_START',
   success: 'CHECK_PHONE_SUCCESS',
@@ -51,4 +57,10 @@ export const RECOVER_NEW_PASSWORD = {
   started: 'RECOVER_NEW_PASSWORD_START',
   success: 'RECOVER_NEW_PASSWORD_SUCCESS',
   failed: 'RECOVER_NEW_PASSWORD_FAILED',
+};
+
+export const GET_PROFILE = {
+  started: 'GET_PROFILE_START',
+  success: 'GET_PROFILE_SUCCESS',
+  failed: 'GET_PROFILE_FAILED',
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Main, Cabinet, Detail, Login, Map, Offer, Password, Register, Request, Forgot } from './routes';
+import { Main, Cabinet, Detail, Login, Map, Offer, Password, Register, Request, Forgot, Profile } from './routes';
 import isLoggedIn from 'src/utils/isLoggedIn';
 
 const MainRoutes = () => {
@@ -9,6 +9,7 @@ const MainRoutes = () => {
       <Route exact path="/" component={Main} />
       <Route exact path="/cabinet" component={ isLoggedIn() ? Cabinet : Login} />
       <Route path="/cabinet/password" component={isLoggedIn() ? Password : Login} />
+      <Route path="/cabinet/profile" component={isLoggedIn() ? Profile : Login} />
       <Route path="/detail" component={isLoggedIn() ? Detail : Login} />
       <Route exact path="/login" component={Login} />
       <Route path="/login/forgot" component={Forgot} />

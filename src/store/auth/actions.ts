@@ -1,6 +1,6 @@
 import { defaultAction } from 'src/store/defaultAction';
 import * as api from './api';
-import { LOGIN, UPDATE_PASSWORD, CHECK_PHONE, CHECK_CODE, REGISTER, RECOVER_CHECK_LOGIN, RECOVER_NEW_PASSWORD } from './types';
+import { LOGIN, UPDATE_PASSWORD, CHECK_PHONE, CHECK_CODE, REGISTER, RECOVER_CHECK_LOGIN, RECOVER_NEW_PASSWORD, GET_PROFILE } from './types';
 
 export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?: any) => {
   defaultAction(dispatch, getState, {
@@ -70,6 +70,18 @@ export const updatePassword = (data: any, callbacks?: any) => (dispatch?: any, g
   });
 };
 
+export const updateProfile = (data: any, callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: UPDATE_PASSWORD,
+    apiCall: () => { return api.updateProfile(data); },
+    onSuccess: () => {
+      window.location.replace('/cabinet');
+    },
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
 export const recoverCheckLogin = (data: any, callbacks: any) => (dispatch: any, getState: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
@@ -110,13 +122,25 @@ export const recoverNewPassword = (data: any, callbacks?: any) => (dispatch?: an
   });
 };
 
+export const getProfile = (callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PROFILE,
+    apiCall: () => { return api.getProfile(); },
+    onSuccess: (response: any) => ({ userInfo: response }),
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
 export default{
   login,
   checkPhone,
   checkCode,
   register,
   updatePassword,
+  updateProfile,
   recoverCheckLogin,
   recoverCheckCode,
   recoverNewPassword,
+  getProfile,
 };

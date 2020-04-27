@@ -1,5 +1,5 @@
 import { API_URL } from 'src/constants/server';
-import { stdApiPOST, stdApiPUT } from 'src/store/defaultApi';
+import { stdApiPOST, stdApiPUT, stdApiGET } from 'src/store/defaultApi';
 
 const id = sessionStorage.getItem('userId');
 
@@ -17,8 +17,15 @@ const recoverCheckLoginUrl = `${API_URL}api/user/forgot/login`;
 const recoverCheckCodeUrl =  `${API_URL}api/user/forgot/checkcode`;
 const recoverNewPasswordUrl =  `${API_URL}api/user/forgot/newpassword`;
 
+const getProfileUrl = `${API_URL}api/user/${id}`;
+const updateProfileUrl = `${API_URL}api/user/${id}`;
+
 export const login = (data: any) => (
     stdApiPOST({ data, url: authUrl })
+);
+
+export const getProfile = () => (
+  stdApiGET({ url: getProfileUrl })
 );
 
 export const checkPhone = (data: any) => (
@@ -35,6 +42,10 @@ export const register = (data: any) => (
 
 export const updatePassword = (data: any) => (
   stdApiPUT({ data, url: updatePasswordUrl })
+);
+
+export const updateProfile = (data: any) => (
+  stdApiPUT({ data, url: updateProfileUrl })
 );
 
 export const recoverCheckLogin = (data: any) => (

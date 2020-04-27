@@ -16,7 +16,8 @@ function MainPage(props: MainPageTypes.IProps) {
   useEffect(() => {
     if (!didMount) {
       setDidMount(true);
-      isConsumer ? getItems && getItems() : getRequests && getRequests();
+      getItems && getItems();
+      getRequests && getRequests();
     }
   },
   [didMount, getItems, getRequests, isConsumer],

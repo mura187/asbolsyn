@@ -7,6 +7,7 @@ import TabBar from 'src/components/molecules/TabBar';
 import { PasswordPageTypes } from 'src/pages/Cabinet/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import './index.scss';
 
 function Password(props: PasswordPageTypes.IProps) {
   const [error, setError] = useState(false);
@@ -44,12 +45,12 @@ function Password(props: PasswordPageTypes.IProps) {
       setError(true);
     }
   };
-
+  
   return (
     <div>
       <h1 className="main-logo text-center f-32">As Bolsyn</h1>
       <div className="row align-items-center justify-content-center mt-180">
-        <div className="update-password container bg-white base-shadow">
+        <div className="password-update container bg-white base-shadow">
           <div className="text-left">
             <p className="container my-20 f-14">Смена пароля</p>
           </div>
@@ -61,7 +62,7 @@ function Password(props: PasswordPageTypes.IProps) {
                 placeholder="Введите старый пароль"
                 name="oldPassword" value={userInput.oldPassword} onChange={handleChange}
               />
-              <div className="show-align-self-center text-grey cursor-pointer mt-18 position-absolute r-64"
+              <div className="container align-self-start text-grey cursor-pointer mt-18 position-absolute r-72"
                 onClick={showPass ? () => (setShowPass(false)) : () => (setShowPass(true))}>
                 { showPass ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} /> }
               </div>
@@ -82,6 +83,7 @@ function Password(props: PasswordPageTypes.IProps) {
               </p>
             }
             <button
+              disabled={userInput.newPassword !== userInput.checkedPassword}
               onClick={submitForm}
               className="container update-password__submit mt-16 mb-40" type="submit">Сменить
             </button>

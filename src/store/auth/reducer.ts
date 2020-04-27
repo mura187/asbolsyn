@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { ILoadTypes } from 'src/store/types';
-import { GET_USER, LOGIN, UPDATE_PASSWORD, RECOVER_CHECK_LOGIN } from './types';
+import { GET_USER, LOGIN, UPDATE_PASSWORD, RECOVER_CHECK_LOGIN, GET_PROFILE } from './types';
 
 const user = (
     state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
@@ -48,10 +48,10 @@ const userToken = (state = null, action: any) => {
 
 const userInfo = (state = null, action: any) => {
   switch (action.type) {
-    case LOGIN.success:
-      return (action.user_info || null);
-    case LOGIN.failed:
-      return (action.user_error || null);
+    case GET_PROFILE.success:
+      return (action.userInfo || null);
+    case GET_PROFILE.failed:
+      return (action.errorMessage || null);
     default:
       return state;
   }

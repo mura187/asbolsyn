@@ -12,6 +12,9 @@ export const Cabinet = loadable(() => import('src/pages/Cabinet'), {
 export const Password = loadable(() => import('src/pages/Cabinet/PasswordUpdatePage'), {
   modules: ['cabinet/password'],
 });
+export const Profile = loadable(() => import('src/pages/Cabinet/ProfileUpdatePage'), {
+  modules: ['cabinet/profile'],
+});
 export const Detail = loadable(() => import('src/pages/Detail'), {
   modules: ['detail'],
 });

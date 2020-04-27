@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import itemsActions from 'src/store/item/actions';
+import authActions from 'src/store/auth/actions';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import TabBar from 'src/components/molecules/TabBar';
 import { CabinetPageTypes } from './types';
-import { NavLink } from 'react-router-dom';
 
 function CabinetPage(props: CabinetPageTypes.IProps) {
 
@@ -19,7 +20,7 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
   const [didMount, setDidMount] = useState(false);
   const isConsumer = localStorage.getItem('userType') === 'consumer';
   const [btnUserType, setBtnUserType] = useState(isConsumer ? 'производителя' : 'потребителя');
-  const { userInfo, myItems, myRequests, getMyRequests, getMyItems } = props;
+  const { userInfo, myItems, myRequests, getProfile, getMyRequests, getMyItems } = props;
 
   const changeType = () => {
     if (!isConsumer) {
@@ -37,11 +38,12 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
   useEffect(() => {
     if (!didMount) {
       setDidMount(true);
+      getProfile && getProfile();
       getMyItems && getMyItems();
       getMyRequests && getMyRequests();
     }
   },
-    [didMount, isProducer, getMyItems, getMyRequests],
+    [didMount, getProfile, getMyItems, getMyRequests],
   );
 
   return (
@@ -58,6 +60,12 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
           <p onClick={logout} className="text-danger my-15 cursor-pointer">Выход</p>
         </div>
         <div className="d-flex justify-content-between flex-column">
+        <NavLink className="text-decoration-none" to="/cabinet/profile">
+            <div className="d-flex flex-row justify-content-between  text-main border-top cabinet__link f-15">
+              <p className="my-20 cursor-pointer">Редактировать профиль</p>
+              <FontAwesomeIcon className="f-15 mr-20 align-self-center text-black" icon={faChevronRight} />
+            </div>
+          </NavLink>
         <NavLink className="text-decoration-none" to="/?my_items">
           <div className="d-flex flex-row justify-content-between text-main border-top cabinet__link f-15">
             <p className="my-20 cursor-pointer">Мои текущие предложения</p>
@@ -104,6 +112,7 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = {
+  getProfile: authActions.getProfile,
   getMyItems: itemsActions.getMyItems,
   getMyRequests: itemsActions.getMyRequests,
 };

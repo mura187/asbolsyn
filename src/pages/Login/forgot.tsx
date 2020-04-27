@@ -142,7 +142,7 @@ function Forgot(props: ForgotPageTypes.IProps) {
               }
             </>
               : <>
-                <div className="show-align-self-center text-grey cursor-pointer mt-18 position-absolute r-24"
+                <div className="container align-self-start text-grey cursor-pointer mt-18 position-absolute r-72"
                   onClick={showPass ? () => (setShowPass(false)) : () => (setShowPass(true))}>
                   {showPass ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
                 </div>
