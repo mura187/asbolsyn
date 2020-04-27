@@ -3,6 +3,8 @@
 
 ## [Agile Board](https://github.com/users/fullacc/projects/1)
 
+### Install Node JS <br>[For MacOS](https://nodejs.org/en/) <br> [For Ubuntu](https://tecadmin.net/install-latest-nodejs-npm-on-ubuntu/)
+
 `npm install`
 `npm start`
 
