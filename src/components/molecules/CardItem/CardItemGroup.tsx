@@ -11,7 +11,7 @@ function CardItemGroup(props: CardItemGroupTypes.IProps): JSX.Element {
         <h4 className="mt-40 mb-16">{items?.length === 0 ? 'Ничего не найдено' : `${title} (${items?.length})` } </h4>
         { extraTitle &&
           <NavLink to={extraTitle.link}>
-            <h4 className="mt-40 mb-16 text-main">{extraTitle.title}</h4>
+            <h4 className="mt-40 mb-16 text-main white-space-pre">{extraTitle.title}</h4>
           </NavLink>
         }
       </div>

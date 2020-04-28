@@ -107,6 +107,13 @@ body, html {
 .vw_100 {
   width: 100vw;
 }
+.white-space-normal{
+  white-space: normal!important;
+}
+
+.white-space-pre{
+  white-space: pre!important;
+}
 
 // Setting positions
 $position_prefix: 'pos';

@@ -63,12 +63,12 @@ function CardItem(props: CardItemTypes.IProps) {
         </div>
         {!consumerName && <div className={classNames(['container d-flex flex-row justify-content-start my-16'])}>
           <input onChange={onChangeHandler} value={dealQuantity}
-            className="mr-4 p-8" type="text" placeholder="Кол-во"
+            className="mr-4 p-8 w-25" type="text" placeholder="Кол-во"
           />
           <button disabled={userId === producerId.toString() ||
             parseInt(dealQuantity, 10) > availableQuantity ||
             !sessionStorage.hasOwnProperty('token')}
-            className="ml-24 w-25" onClick={createDeal}
+            className="ml-24 fill_w" onClick={createDeal}
           >
               Купить
           </button>
