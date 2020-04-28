@@ -50,13 +50,15 @@ function CabinetPage(props: CabinetPageTypes.IProps) {
     <div>
       <div className="container bg-white base-shadow">
         <div className="cabinet__user d-flex flex-row justify-content-between">
+        {userInfo &&
           <div>
             <p className="f-17 my-15"><FontAwesomeIcon className="f-15 mr-16" icon={faUserAlt} />
-              {userInfo && userInfo.name} {userInfo && userInfo.surname} ({userInfo.user_name})
+              {userInfo.name} {userInfo.surname} ({userInfo.user_name})
             </p>
             <p className="f-15 pb-12">Кабинет №{userInfo.id}</p>
             <p className="f-15 pb-12">+7{userInfo.phone}</p>
           </div>
+        }
           <p onClick={logout} className="text-danger my-15 cursor-pointer">Выход</p>
         </div>
         <div className="d-flex justify-content-between flex-column">

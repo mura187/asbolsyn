@@ -76,7 +76,7 @@ function CardItem(props: CardItemTypes.IProps) {
         }
         {complete === 'false' &&
           <div className="d-flex flex-row justify-content-start my-16">
-            <button className="w-25" onClick={completeDeal}>Завершить сделку</button>
+            <button className="p-8" onClick={completeDeal}>Завершить сделку</button>
           </div>
         }
       </div>

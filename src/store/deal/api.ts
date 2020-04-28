@@ -21,3 +21,4 @@ export const getProducerDeals = () => (
 export const completeDeal = (dealId: string) => (
   stdApiPATCH({ url: `${API_URL}api/deal/${dealId}/complete` })
 );
+
