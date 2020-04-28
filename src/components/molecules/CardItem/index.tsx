@@ -1,12 +1,18 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import classNames from 'classnames';
 import Moment from 'react-moment';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import dealActions from 'src/store/deal/actions';
 import 'moment/locale/ru';
 import { CardItemTypes } from 'src/components/molecules/CardItem/types';
 import './index.scss';
-import { NavLink } from 'react-router-dom';
 
 function CardItem(props: CardItemTypes.IProps) {
+  const userId = sessionStorage.getItem('userId');
+  const [dealQuantity, setDealQuantity] = useState(1);
   const {
+    id,
     producerName,
     producerId,
     consumerName,
@@ -17,7 +23,19 @@ function CardItem(props: CardItemTypes.IProps) {
     quantity,
     location,
     created,
+    onCreateDeal,
   } = props;
+
+  const createDeal = () => {
+    onCreateDeal && onCreateDeal({ quantity: dealQuantity, price: 303 }, id.toString());
+  };
+
+  console.log(dealQuantity);
+
+  const onChangeHandler = (e: any) => {
+    setDealQuantity(e.target.value);
+  };
+
   return (
     <>
       <div className="card-item base-shadow d-flex flex-column container my-10">
@@ -37,10 +55,21 @@ function CardItem(props: CardItemTypes.IProps) {
           {created && <Moment fromNow>{created}</Moment>}
           <p>{location.join(', ')}</p>
         </div>
+        { !consumerName && <div className={classNames(['container d-flex flex-row justify-content-start my-16'])}>
+          <input onChange={onChangeHandler} value={dealQuantity}
+            className="mr-4 p-8" type="text" placeholder="Кол-во"
+          />
+          <button disabled={userId === producerId.toString() || dealQuantity > availableQuantity}
+          className="ml-24 w-25" onClick={createDeal}>Купить</button>
+        </div>
+        }
       </div>
-
     </>
   );
 }
 
-export default CardItem;
+const mapDispatchToProps = {
+  onCreateDeal: dealActions.createDeal,
+};
+
+export default connect(null, mapDispatchToProps)(CardItem);

@@ -12,6 +12,7 @@ export namespace CardItemTypes {
     description?: number;
     location: number[];
     created: string;
+    onCreateDeal?(data?: any, offerId?: string): void;
   }
 }
 
