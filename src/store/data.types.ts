@@ -11,4 +11,5 @@ export interface IItem {
   description?: number;
   location: number[];
   created: string;
+  complete?: string;
 }

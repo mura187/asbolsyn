@@ -69,3 +69,14 @@ export const stdApiDELETE = (options: any) => (
     },
   )
 );
+
+export const stdApiPATCH = (options: any) => (
+  fetch(
+    options.url,
+    {
+      method: 'PATCH',
+      headers: modifyHeader(options),
+      body: JSON.stringify(options.data || {}),
+    },
+  )
+);

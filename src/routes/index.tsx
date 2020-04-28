@@ -1,6 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Main, Cabinet, Detail, Login, Map, Offer, Password, Register, Request, Forgot, Profile } from './routes';
+import { Main, Cabinet, Detail,
+  Login, Forgot, Map, Offer, Password,
+  Register, Request,
+  Profile, Deal, HandleDeals } from './routes';
 import isLoggedIn from 'src/utils/isLoggedIn';
 
 const MainRoutes = () => {
@@ -17,6 +20,8 @@ const MainRoutes = () => {
       <Route path="/map" component={Map} />
       <Route path="/offer" component={isLoggedIn() ? Offer : Login} />
       <Route path="/request" component={isLoggedIn() ? Request : Login} />
+      <Route exact path="/deal" component={isLoggedIn() ? Deal : Login} />
+      <Route path="/deal/handle" component={isLoggedIn() ? HandleDeals : Login} />
     </Switch>
   );
 };

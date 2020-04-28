@@ -33,6 +33,12 @@ export const Offer = loadable(() => import('src/pages/Offer'), {
 export const Request = loadable(() => import('src/pages/Request'), {
   modules: ['request'],
 });
+export const Deal = loadable(() => import('src/pages/Deal'), {
+  modules: ['deal'],
+});
+export const HandleDeals = loadable(() => import('src/pages/Deal/HandleDeals'), {
+  modules: ['deal/handle'],
+});
 
 // export const PageNotFound = loadable(() => import('../pages/pageNotFound'), {
 //   modules: ['pageNotFound'],

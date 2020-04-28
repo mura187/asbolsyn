@@ -12,13 +12,16 @@ export namespace CardItemTypes {
     description?: number;
     location: number[];
     created: string;
-    onCreateDeal?(data?: any, offerId?: string): void;
+    complete?: string;
+    onCreateDeal?(data: any, offerId?: string): void;
+    onCompleteDeal?(dealId: string): void;
   }
 }
 
 export namespace CardItemGroupTypes {
   export interface IProps {
     title: string;
+    extraTitle?: any;
     items?: CardItemTypes.IProps[];
   }
 }

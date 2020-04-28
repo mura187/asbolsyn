@@ -2,6 +2,9 @@ import { defaultAction } from 'src/store/defaultAction';
 import * as api from 'src/store/deal/api';
 import {
   CREATE_DEAL,
+  GET_ACTIVE_DEALS,
+  GET_PRODUCER_DEALS,
+  COMPLETE_DEAL,
 } from 'src/store/deal/types';
 
 export const createDeal = (data: any, offerId: string, callbacks?: any) => (dispatch?: any, getState?: any) => {
@@ -20,6 +23,39 @@ export const createDeal = (data: any, offerId: string, callbacks?: any) => (disp
   });
 };
 
+export const getActiveDeals = (callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_ACTIVE_DEALS,
+    apiCall: () => { return api.getActiveDeals(); },
+    onSuccess: (response: any) => ({ list: response }),
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
+export const getProducerDeals = (callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_PRODUCER_DEALS,
+    apiCall: () => { return api.getProducerDeals(); },
+    onSuccess: (response: any) => ({ list: response }),
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
+export const completeDeal = (dealId: string, callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: COMPLETE_DEAL,
+    apiCall: () => { return api.completeDeal(dealId); },
+    onSuccess: () => (window.location.reload()),
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
 export default {
   createDeal,
+  getActiveDeals,
+  getProducerDeals,
+  completeDeal,
 };
