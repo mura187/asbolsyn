@@ -81,47 +81,54 @@ $breakpoints : $grid-breakpoints-custom;
 
 // main function definition
 @mixin make-space($values, $prefixes, $breakpoints) {
-  // without media queries
-  @each $attr-short, $attr-long in $prefixes {
-    @each $value in $values {
-      @if($attr-short == 'my' or $attr-short == 'py') {
-        .#{$attr-short}-#{$value} {
-          #{$attr-long}-top: #{$value}#{'px!important'};
-          #{$attr-long}-bottom: #{$value}#{'px!important'};
-        }
-      }
-      @else if($attr-short == 'mx' or $attr-short == 'px') {
-        .#{$attr-short}-#{$value} {
-          #{$attr-long}-right: #{$value}#{'px!important'};
-          #{$attr-long}-left: #{$value}#{'px!important'};
-        }
-      }
-      @else {
-        .#{$attr-short}-#{$value} {
-          #{$attr-long}: #{$value}#{'px!important'};
-        }
-      }
-    }
-  }
   @each $breakpoint-name, $breakpoint-value in $breakpoints {
-    // if xs value = 0, set it global without media queries
+    // without media queries
     @if($breakpoint-value == 0) {
       @each $attr-short, $attr-long in $prefixes {
         @each $value in $values {
-          .#{$breakpoint-name}-#{$attr-short}-#{$value} {
-            #{$attr-long}: #{$value}#{'px!important'};
+          @if($attr-short == 'my' or $attr-short == 'py') {
+            .#{$attr-short}-#{$value} {
+              #{$attr-long}-top: #{$value}#{'px!important'};
+              #{$attr-long}-bottom: #{$value}#{'px!important'};
+            }
+          }
+          @else if($attr-short == 'mx' or $attr-short == 'px') {
+            .#{$attr-short}-#{$value} {
+              #{$attr-long}-right: #{$value}#{'px!important'};
+              #{$attr-long}-left: #{$value}#{'px!important'};
+            }
+          }
+          @else {
+            .#{$attr-short}-#{$value} {
+              #{$attr-long}: #{$value}#{'px!important'};
+            }
           }
         }
       }
     }
-      // breakpoint values that not equal to 0
+      // with media queries
     @else {
       @media screen and (min-width: $breakpoint-value) {
         @each $attr-short, $attr-long in $prefixes {
           @each $value in $values {
-            .#{$attr-short}-#{$breakpoint-name}-#{$value} {
-              #{$attr-long}: #{$value}#{'px!important'};
+            @if($attr-short == 'my' or $attr-short == 'py') {
+              .#{$attr-short}-#{$breakpoint-name}-#{$value} {
+                #{$attr-long}-top: #{$value}#{'px!important'};
+                #{$attr-long}-bottom: #{$value}#{'px!important'};
+              }
             }
+            @else if($attr-short == 'mx' or $attr-short == 'px') {
+              .#{$attr-short}-#{$breakpoint-name}-#{$value} {
+                #{$attr-long}-right: #{$value}#{'px!important'};
+                #{$attr-long}-left: #{$value}#{'px!important'};
+              }
+            }
+            @else {
+              .#{$attr-short}-#{$breakpoint-name}-#{$value} {
+                #{$attr-long}: #{$value}#{'px!important'};
+              }
+            }
+
           }
         }
       }
