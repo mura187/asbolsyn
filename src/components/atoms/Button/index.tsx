@@ -19,41 +19,41 @@ export default class Button extends React.Component<ButtonTypes.IProps> {
     } = this.props;
 
     return (
-        to ? (
-          <Link
+      to ? (
+        <Link
+          className={classNames([
+            `btn ${this.props.classNames}`,
+            { 'fill_w justify-content-center': fullWidth },
+          ])}
+          to={to}
+          style={{textDecoration: 'none'}}
+        >
+          {children}
+        </Link>
+      ) : (
+        href ? (
+          <a
             className={classNames([
               `btn ${this.props.classNames}`,
               { 'fill_w justify-content-center': fullWidth },
             ])}
-            to={to}
-            style={{textDecoration: 'none'}}
+            href={href}
+            target={target}
           >
             {children}
-          </Link>
+          </a>
         ) : (
-          href ? (
-            <a
-              className={classNames([
-                `btn ${this.props.classNames}`,
-                { 'fill_w justify-content-center': fullWidth },
-              ])}
-              href={href}
-              target={target}
-            >
-              {children}
-            </a>
-          ) : (
-            <button
-              className={classNames([
-                `btn ${this.props.classNames}`,
-                { 'fill_w justify-content-center': fullWidth },
-              ])}
-              onClick={onClick}
-              disabled={disabled}
-            >
-              {children}
-            </button>
-          )
+          <button
+            className={classNames([
+              `btn ${this.props.classNames}`,
+              { 'fill_w justify-content-center': fullWidth },
+            ])}
+            onClick={onClick}
+            disabled={disabled}
+          >
+            {children}
+          </button>
+        )
       )
     );
   }

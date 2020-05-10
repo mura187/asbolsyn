@@ -1,6 +1,9 @@
-import React from "react";
+import React from 'react';
+import { SvgTypes } from 'src/components/atoms/Svg/types';
 
-function CloseIcon() {
+function CloseIcon(props: SvgTypes.IProps) {
+  const { className, color, onClick } = props;
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,9 +11,11 @@ function CloseIcon() {
       height="24"
       fill="none"
       viewBox="0 0 24 24"
+      className={className}
+      onClick={onClick}
     >
       <path
-        stroke="#7A7B82"
+        stroke={color || '#7A7B82'}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"
