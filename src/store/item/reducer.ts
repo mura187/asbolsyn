@@ -81,11 +81,13 @@ const myItems = (state = { data: [], loading: false }, action: any) => {
   }
 };
 
-
 export const parsePlacesData = (raw: IItem): any => ({
   price: raw.price,
   name: raw.food_name,
   location: raw.location,
+  description: raw.description,
+  consumerName: raw.consumer_name,
+  created: raw.created,
 });
 
 const places = (
@@ -110,6 +112,46 @@ const places = (
         };
       }
       const parsedData = action.list.map((n: IItem) => parsePlacesData(n));
+      return {
+        data: parsedData,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const parsePlacesRequestsData = (raw: IItem): any => ({
+  price: raw.price,
+  name: raw.food_name,
+  location: raw.location,
+  description: raw.description,
+  consumerName: raw.consumer_name,
+  created: raw.created,
+});
+
+const placesRequests = (
+  state = { data: [], loading: false }, action: any): any => {
+  switch (action.type) {
+    case GET_REQUESTS.started:
+      return {
+        data: [],
+        loading: true,
+      };
+    case GET_REQUESTS.failed:
+      return {
+        data: [],
+        errorMessage: action.errorMessage,
+        loading: false,
+      };
+    case GET_REQUESTS.success:
+      if (!action.list) {
+        return {
+          data: [],
+          loading: false,
+        };
+      }
+      const parsedData = action.list.map((n: IItem) => parsePlacesRequestsData(n));
       return {
         data: parsedData,
         loading: false,
@@ -187,6 +229,7 @@ const itemReducer = combineReducers({
   requests,
   myRequests,
   places,
+  placesRequests,
 });
 
 export default itemReducer;

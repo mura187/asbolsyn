@@ -8,7 +8,15 @@ import PlacemarkIcon from 'src/assets/images/icons/placemark.svg';
 import { MapPageTypes } from './types';
 
 function MapPage(props: MapPageTypes.IProps) {
-  const { places, getItems } = props;
+
+  const isConsumer = () => {
+    if (localStorage.getItem('userType') === 'consumer') {
+      return places;
+    }
+    return placesRequests;
+  };
+
+  const { places, placesRequests, getRequests, getItems } = props;
   const [didMount, setDidMount] = useState(false);
   const [latitude, setLatitude] = useState(50.322687);
   const [longitude, setLongitude] = useState(57.131267);
@@ -23,7 +31,7 @@ function MapPage(props: MapPageTypes.IProps) {
     if (location) {
       location.getCurrentPosition((position: any) => {
         setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude) ;
+        setLongitude(position.coords.longitude);
       });
     }
   };
@@ -33,10 +41,13 @@ function MapPage(props: MapPageTypes.IProps) {
       getMyLocation();
       setDidMount(true);
       getItems && getItems();
+      getRequests && getRequests();
     }
   },
-  [didMount, getItems],
+  [didMount, getItems, getRequests],
   );
+
+  console.log(placesRequests);
 
   const mapState = { center: { ...coordinates }, zoom: 14 };
 
@@ -68,7 +79,7 @@ function MapPage(props: MapPageTypes.IProps) {
               strokeWidth: 3,
             }}
           />
-          {places && places.data.map((n: any) => <>
+          { isConsumer().data.map((n: any) => <>
             <Placemark
               options={{
                 iconLayout: 'default#image',
@@ -80,7 +91,8 @@ function MapPage(props: MapPageTypes.IProps) {
               defaultProperties={{
                 balloonContentBody: `
                   <b>${n.name} | ${n.price} ₸</b><br/>
-                  <i>${n.location}</i>
+                  <p>${n.description}</p>
+                  <p>@${n.consumerName}</p>
                 `,
               }}
             />
@@ -95,11 +107,13 @@ function MapPage(props: MapPageTypes.IProps) {
 const mapStateToProps = (state: any) => {
   return ({
     places: state.itemReducer.places,
+    placesRequests: state.itemReducer.placesRequests,
   });
 };
 
 const mapDispatchToProps = {
   getItems: itemActions.getItems,
+  getRequests: itemActions.getRequests,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapPage);
