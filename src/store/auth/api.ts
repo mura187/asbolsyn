@@ -59,3 +59,7 @@ export const recoverCheckCode = (data: any) => (
 export const recoverNewPassword = (data: any) => (
   stdApiPOST({ data, url: recoverNewPasswordUrl })
 );
+
+export const getAllUsers = () => (
+  stdApiGET({ url: `${API_URL}api/user/` })
+);

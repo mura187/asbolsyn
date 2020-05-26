@@ -23,21 +23,21 @@ export const createDeal = (data: any, offerId: string, callbacks?: any) => (disp
   });
 };
 
-export const getActiveDeals = (callbacks?: any) => (dispatch?: any, getState?: any) => {
+export const getActiveDeals = (active: boolean, callbacks?: any) => (dispatch?: any, getState?: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_ACTIVE_DEALS,
-    apiCall: () => { return api.getActiveDeals(); },
+    apiCall: () => { return api.getActiveDeals(active); },
     onSuccess: (response: any) => ({ list: response }),
     onError: (response: any) => ({ errorPassword: response.Error }),
   });
 };
 
-export const getProducerDeals = (callbacks?: any) => (dispatch?: any, getState?: any) => {
+export const getProducerDeals = (active: boolean, callbacks?: any) => (dispatch?: any, getState?: any) => {
   defaultAction(dispatch, getState, {
     callbacks,
     action: GET_PRODUCER_DEALS,
-    apiCall: () => { return api.getProducerDeals(); },
+    apiCall: () => { return api.getProducerDeals(active); },
     onSuccess: (response: any) => ({ list: response }),
     onError: (response: any) => ({ errorPassword: response.Error }),
   });

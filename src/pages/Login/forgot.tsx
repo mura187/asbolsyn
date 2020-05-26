@@ -50,7 +50,6 @@ function Forgot(props: ForgotPageTypes.IProps) {
     setUserInput({ [name]: newValue });
     setPhone(formattedNumber);
   };
-  console.log(userInput.phone, recoverByUsername)
 
   const submitLogin = () => {
     onCheckLogin && onCheckLogin(

@@ -7,23 +7,25 @@ import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
 import { DealPageTypes } from './types';
 
 function DealPage(props: DealPageTypes.IProps) {
-  const { deals, getDeals } = props;
-  const [didMount, setDidMount] = useState(false);
+  const { deals, getDeals, getProducerDeals, producerDeals } = props;
+  const userType = window.localStorage.getItem('userType');
 
-  useEffect(() => {
-    if (!didMount) {
-      setDidMount(true);
-      getDeals && getDeals();
-    }
-  },
-  [didMount, getDeals],
+  useEffect(
+    () => {
+      if (userType === 'producer') {
+        getProducerDeals && getProducerDeals(true);
+      } else {
+        getDeals && getDeals(true);
+      }
+    },
+    [],
   );
-  console.log(deals && deals);
   return (
     <>
       <CardItemGroup
-        extraTitle={{ link: '/deal/handle', title: 'Управление моими сделками' }}
-        title="Активные сделки" items={deals}
+        extraTitle={{ link: '/deal/handle', title: 'Завершенные сделки' }}
+        title="Активные сделки" items={userType === 'producer' ? producerDeals : deals}
+        isDeal={true}
       />
       <TabBar />
     </>
@@ -33,11 +35,13 @@ function DealPage(props: DealPageTypes.IProps) {
 const mapStateToProps = (state: any) => {
   return ({
     deals: state.dealReducer?.myDeals?.data,
+    producerDeals: state.dealReducer?.producerDeals?.data,
   });
 };
 
 const mapDispatchToProps = {
   getDeals: dealActions.getActiveDeals,
+  getProducerDeals: dealActions.getProducerDeals,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DealPage);

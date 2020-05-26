@@ -64,3 +64,9 @@ export const GET_PROFILE = {
   success: 'GET_PROFILE_SUCCESS',
   failed: 'GET_PROFILE_FAILED',
 };
+
+export const GET_ALL_USERS = {
+  started: 'GET_ALL_USERS_START',
+  success: 'GET_ALL_USERS_SUCCESS',
+  failed: 'GET_ALL_USERS_FAILED',
+};

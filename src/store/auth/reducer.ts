@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 import { ILoadTypes } from 'src/store/types';
-import { GET_USER, LOGIN, UPDATE_PASSWORD, RECOVER_CHECK_LOGIN, GET_PROFILE } from './types';
+import { GET_USER, LOGIN,
+  UPDATE_PASSWORD, RECOVER_CHECK_LOGIN, GET_PROFILE,
+  GET_ALL_USERS,
+} from './types';
 
 const user = (
     state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
@@ -79,8 +82,42 @@ const userNumber = (state = null, action: any) => {
   }
 };
 
+const users = (
+  state = { data: null, loading: false }, action: any): ILoadTypes<any | null> => {
+  switch (action.type) {
+    case GET_ALL_USERS.failed:
+      return {
+        data: null,
+        errorMessage: action.errorMessage,
+        loading: true,
+      };
+    case GET_ALL_USERS.success:
+      if (!action.data) {
+        return {
+          data: null,
+          errorMessage: undefined,
+          loading: false,
+        };
+      }
+      return {
+        data: action.data,
+        errorMessage: undefined,
+        loading: false,
+      };
+    case GET_ALL_USERS.started:
+      return {
+        data: null,
+        errorMessage: undefined,
+        loading: true,
+      };
+    default:
+      return state;
+  }
+};
+
 const authReducer = combineReducers({
   user,
+  users,
   userToken,
   userInfo,
   errorPassword,

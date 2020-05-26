@@ -7,21 +7,29 @@ import CardItemGroup from 'src/components/molecules/CardItem/CardItemGroup';
 import { HandleDealsPageTypes } from './types';
 
 function HandleDealsPage(props: HandleDealsPageTypes.IProps) {
-  const { deals, getProducerDeals } = props;
-  const [didMount, setDidMount] = useState(false);
+  const { consumerDeals, getProducerDeals, getConsumerDeals, producerDeals } = props;
+  const userType = window.localStorage.getItem('userType');
 
-  useEffect(() => {
-    if (!didMount) {
-      setDidMount(true);
-      getProducerDeals && getProducerDeals();
-    }
-  },
-  [didMount, getProducerDeals],
+  useEffect(
+    () => {
+      if (userType === 'producer') {
+        getProducerDeals && getProducerDeals(false);
+      } else {
+        getConsumerDeals && getConsumerDeals(false);
+      }
+    },
+    [],
   );
-  console.log(deals && deals.length);
+  console.log(consumerDeals);
+
   return (
     <>
-      <CardItemGroup title="Активные сделки" items={deals} />
+      <CardItemGroup
+        isDeal
+        isComplete
+        title="Завершенные сделки" items={userType === 'producer' ?
+        producerDeals.filter((item:any) => item.complete === 'true') :
+        consumerDeals.filter((item:any) => item.complete === 'true')} />
       <TabBar />
     </>
   );
@@ -29,12 +37,14 @@ function HandleDealsPage(props: HandleDealsPageTypes.IProps) {
 
 const mapStateToProps = (state: any) => {
   return ({
-    deals: state.dealReducer?.producerDeals?.data,
+    consumerDeals: state.dealReducer?.myDeals?.data,
+    producerDeals: state.dealReducer?.producerDeals?.data,
   });
 };
 
 const mapDispatchToProps = {
   getProducerDeals: dealActions.getProducerDeals,
+  getConsumerDeals: dealActions.getActiveDeals,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HandleDealsPage);

@@ -1,6 +1,16 @@
 import { defaultAction } from 'src/store/defaultAction';
 import * as api from './api';
-import { LOGIN, UPDATE_PASSWORD, CHECK_PHONE, CHECK_CODE, REGISTER, RECOVER_CHECK_LOGIN, RECOVER_NEW_PASSWORD, GET_PROFILE } from './types';
+import {
+  LOGIN,
+  UPDATE_PASSWORD,
+  CHECK_PHONE,
+  CHECK_CODE,
+  REGISTER,
+  RECOVER_CHECK_LOGIN,
+  RECOVER_NEW_PASSWORD,
+  GET_PROFILE,
+  GET_ALL_USERS,
+} from './types';
 
 export const login = (data: any, callbacks?: any) => (dispatch?: any, getState?: any) => {
   defaultAction(dispatch, getState, {
@@ -132,6 +142,16 @@ export const getProfile = (callbacks?: any) => (dispatch?: any, getState?: any) 
   });
 };
 
+export const getAllUsers = (callbacks?: any) => (dispatch?: any, getState?: any) => {
+  defaultAction(dispatch, getState, {
+    callbacks,
+    action: GET_ALL_USERS,
+    apiCall: () => { return api.getAllUsers(); },
+    onSuccess: (response: any) => ({ data: response }),
+    onError: (response: any) => ({ errorPassword: response.Error }),
+  });
+};
+
 export default{
   login,
   checkPhone,
@@ -143,4 +163,5 @@ export default{
   recoverCheckCode,
   recoverNewPassword,
   getProfile,
+  getAllUsers,
 };

@@ -1,0 +1,5 @@
+export const CREATE_FEEDBACK = {
+  started: 'CREATE_FEEDBACK_START',
+  success: 'CREATE_FEEDBACK_SUCCESS',
+  failed: 'CREATE_FEEDBACK_FAILED',
+};

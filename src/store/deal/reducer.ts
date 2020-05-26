@@ -17,6 +17,7 @@ export const parseDealsData = (raw: IItem): CardItemTypes.IProps => ({
   created: raw.created,
   quantity: raw.quantity,
   description: raw.description,
+  complete: raw.complete,
 });
 
 export const parseProducerDealsData = (raw: IItem): CardItemTypes.IProps => ({

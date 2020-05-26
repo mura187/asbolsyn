@@ -1,13 +1,17 @@
 export namespace DealPageTypes {
   export interface IProps{
     deals?: any;
-    getDeals?(): void;
+    producerDeals?: any;
+    getDeals?(active: boolean): void;
+    getProducerDeals?(active: boolean): void;
   }
 }
 
 export namespace HandleDealsPageTypes {
   export interface IProps{
-    deals?: any;
-    getProducerDeals?(): void;
+    consumerDeals?: any;
+    producerDeals?: any;
+    getProducerDeals?(active: boolean): void;
+    getConsumerDeals?(active: boolean): void;
   }
 }

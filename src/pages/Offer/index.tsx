@@ -79,7 +79,7 @@ function CreateOffer(props: OfferPageTypes.IProps) {
             <button onClick={() => forceUpdate()} className="container mt-16 mb-40">
               Подтвердить адрес
             </button>
-            <button disabled={getLocation.length === 0} onClick={submitForm}
+            <button onClick={submitForm}
               className="container create-offer__submit mt-16 mb-40" type="submit">Создать
             </button>
             {error &&
