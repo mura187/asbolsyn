@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import feedbackActions from 'src/store/feedback/actions';
 
 import Typography from 'src/components/atoms/Typography';
+import StarRating from 'react-svg-star-rating';
 
 import { FeedBackModalTypes } from 'src/components/molecules/FeedBackModal/types';
 import { ReactComponent as CloseIcon  } from 'src/assets/images/icons/close.svg';
@@ -10,7 +11,7 @@ import './indes.scss';
 
 function FeedBackModal(props: FeedBackModalTypes.IProps) {
   const { createFeedback, dealId, onCloseClick } = props;
-  const [ratingNum, setRatingNum] = useState<string>('');
+  const [ratingNum, setRatingNum] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
 
   const onSubmitClick = () => {
@@ -21,9 +22,8 @@ function FeedBackModal(props: FeedBackModalTypes.IProps) {
     }, dealId);
   };
 
-  const onRatingInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length > 1 || +event.target.value > 5) return;
-    setRatingNum(event.target.value);
+  const onRatingInputChange = (newRating: number) => {
+    setRatingNum(newRating);
   };
 
   const onTextareaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,11 +37,10 @@ function FeedBackModal(props: FeedBackModalTypes.IProps) {
         <Typography variant="h1">Оставить отзыв</Typography>
         <div className="d-flex flex-column mt-32 mb-32">
           <Typography variant="textmed" className="mb-10">Рейтинг от 0 до 5:</Typography>
-          <input
-            value={ratingNum}
-            type="number"
-            onChange={onRatingInputChange}
-            className="feedback-modal__amount"
+          <StarRating
+            handleOnClick={onRatingInputChange}
+            count={5}
+            initialRating={0}
           />
         </div>
         <div className="d-flex flex-column mt-32 mb-32">
@@ -53,7 +52,7 @@ function FeedBackModal(props: FeedBackModalTypes.IProps) {
           />
         </div>
         <button
-          disabled={ratingNum.length < 1 && description.length < 1}
+          disabled={ratingNum < 1 && description.length < 1}
           className="feedback-modal__button" type="submit"
           onClick={onSubmitClick}
         >
