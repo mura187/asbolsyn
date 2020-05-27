@@ -37,7 +37,7 @@ function CardItemGroup(props: CardItemGroupTypes.IProps): JSX.Element {
             <CardItem
               isComplete={isComplete}
               isDeal={isDeal}
-              rating={getRating(n.producerId)}
+              rating={token ? getRating(n.producerId) : 5}
               {...n}
             />
           </React.Fragment>
