@@ -7,8 +7,10 @@ import { connect } from 'react-redux';
 
 function CardItemGroup(props: CardItemGroupTypes.IProps): JSX.Element {
   const { items, title, extraTitle, isDeal, isComplete, getAllUsers, users = [] } = props;
+  const token = sessionStorage.getItem('token');
   useEffect(
     () => {
+      if (!token) return;
       getAllUsers && getAllUsers();
     },
     [],
@@ -47,7 +49,7 @@ function CardItemGroup(props: CardItemGroupTypes.IProps): JSX.Element {
 
 const mapStateToProps = (state: any) => {
   return ({
-    users: state.authReducer.users.data,
+    users: state.authReducer?.users?.data,
   });
 };
 
