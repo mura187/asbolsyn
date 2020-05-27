@@ -46,7 +46,7 @@ function Login(props:LoginPageTypes.IProps) {
 
   return (
     <div>
-      <h1 className="main-logo text-center f-32">As Bolsyn</h1>
+      <h1 className="main-logo text-center f-32">Fresta</h1>
       <div className="row align-items-center justify-content-center mt-180">
         <div className="form-login container px-20">
           <div className="text-left">

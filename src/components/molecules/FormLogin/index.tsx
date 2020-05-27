@@ -3,7 +3,7 @@ import './index.scss';
 
 function FormLogin() {
   return (<>
-    <h1 className="main-logo text-center f-32">As Bolsyn</h1>
+    <h1 className="main-logo text-center f-32">Fresta</h1>
     <div className="row align-items-center justify-content-center mt-180">
       <div className="form-login">
         <div className="text-left">

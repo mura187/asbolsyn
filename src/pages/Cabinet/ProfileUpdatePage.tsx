@@ -43,7 +43,7 @@ function ProfileUpdate(props: ProfilePageTypes.IProps) {
 
   return (
     <div>
-      <h1 className="main-logo text-center f-32">As Bolsyn</h1>
+      <h1 className="main-logo text-center f-32">Fresta</h1>
       <div className="row align-items-center justify-content-center mt-180">
         <div className="profile-update container bg-white base-shadow">
           <div className="text-left">

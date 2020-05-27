@@ -81,7 +81,7 @@ function DetailPage(props: DetailPageTypes.IProps) {
   };
 
   return (<>
-    <h1 className="main-logo text-center f-32">As Bolsyn</h1>
+    <h1 className="main-logo text-center f-32">Fresta</h1>
     <div className="edit-page container bg-white base-shadow mt-180">
       <div className="d-flex flex-row justify-content-between text-left">
         <p className="f-14 py-20">
